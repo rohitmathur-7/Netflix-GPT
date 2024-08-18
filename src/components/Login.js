@@ -91,7 +91,7 @@ const Login = () => {
       )
         .then(() => {
           // Signed in
-          navigate("/browse");
+          // navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
