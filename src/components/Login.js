@@ -7,9 +7,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
+import { PROFILE_IMG, HOME_BG } from "../utils/constants";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -17,7 +17,6 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState(null);
   const [authError, setAuthError] = useState(null);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const userName = useRef(null);
@@ -40,7 +39,6 @@ const Login = () => {
 
     if (!isSignIn) {
       // Sign Up Logic
-
       createUserWithEmailAndPassword(
         auth,
         userEmail.current.value,
@@ -52,12 +50,10 @@ const Login = () => {
 
           updateProfile(user, {
             displayName: userName.current.value,
-            photoURL:
-              "https://cdn-imgix.headout.com/media/images/c9db3cea62133b6a6bb70597326b4a34-388-dubai-img-worlds-of-adventure-tickets-01.jpg",
+            photoURL: PROFILE_IMG,
           })
             .then(() => {
               // Profile updated!
-              // ...
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(
                 addUser({
@@ -67,11 +63,9 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
-              // ...
               setAuthError(error.message);
             });
         })
@@ -83,7 +77,6 @@ const Login = () => {
         });
     } else {
       // Sign In Logic
-
       signInWithEmailAndPassword(
         auth,
         userEmail.current.value,
@@ -91,7 +84,6 @@ const Login = () => {
       )
         .then(() => {
           // Signed in
-          // navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -111,7 +103,7 @@ const Login = () => {
       <Header />
       <div>
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/b2c3e95b-b7b5-4bb7-a883-f4bfc7472fb7/19fc1a4c-82db-4481-ad08-3a1dffbb8c39/IN-en-20240805-POP_SIGNUP_TWO_WEEKS-perspective_WEB_24a485f6-1820-42be-9b60-1b066f1eb869_large.jpg"
+          src={HOME_BG}
           alt="Home background"
           className="w-screen h-screen object-cover"
         />
