@@ -50,7 +50,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute header flex justify-between w-screen pr-8">
+    <div className="absolute header flex justify-between w-screen px-8 z-[1] text-white">
       <img width={200} src={LOGO} alt="Logo" />
       {user && (
         <div>
