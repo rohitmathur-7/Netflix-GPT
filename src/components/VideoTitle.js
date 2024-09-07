@@ -4,10 +4,10 @@ import info from "../../src/assets/images/info.svg";
 
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className="flex gap-4 flex-col pl-8 pt-52 absolute text-white bg-gradient-to-r from-black w-screen aspect-video">
+    <div className="flex gap-4 flex-col pl-8 pt-64 absolute text-white bg-gradient-to-r from-black w-screen aspect-video">
       <div className="max-w-[40%]">
         <h1 className="text-5xl">{title}</h1>
-        <p className="text-xl pt-4">{overview}</p>
+        {/* <p className="text-xl pt-4">{overview}</p> */}
       </div>
       <div className="flex gap-4 btn-container pt-4 ">
         <button className="flex gap-2 px-5 py-3 rounded-lg bg-white text-black hover:opacity-80">
