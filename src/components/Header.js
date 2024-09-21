@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "../utils/userSlice";
@@ -11,6 +11,7 @@ import { toggleGptSearchView } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
+  const location = useLocation();
   const navigate = useNavigate();
 
   const user = useSelector((store) => store.user);
@@ -51,7 +52,10 @@ const Header = () => {
             photoURL: photoURL,
           })
         );
-        navigate("/browse");
+        // If the current URL does not include "/movie", navigate to /browse
+        if (!location.pathname.includes("/movie")) {
+          navigate("/browse");
+        }
       } else {
         // User is signed out
         dispatch(removeUser());
