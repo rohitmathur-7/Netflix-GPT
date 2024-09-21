@@ -1,9 +1,11 @@
 import React from "react";
 import { IMG_CDN_URL } from "../utils/constants";
 
-const MovieCard = ({ posterPath }) => {
+const MovieCard = ({ posterPath, isGptMovies }) => {
+  if (!posterPath) return;
+
   return (
-    <div className="w-32">
+    <div className={isGptMovies ? "w-48" : "w-32"}>
       <img alt="Movie Card" src={IMG_CDN_URL + posterPath} />
     </div>
   );

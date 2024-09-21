@@ -24,3 +24,4 @@ yarn-error.log*
 
 todo.txt
 /src/utils/constants.js
+.env
