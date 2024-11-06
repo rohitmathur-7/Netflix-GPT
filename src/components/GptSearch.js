@@ -9,7 +9,7 @@ const GptSearch = () => {
       <img
         src={HOME_BG}
         alt="Home background"
-        className="w-screen h-screen object-cover absolute"
+        className="absolute top-0 w-screen h-screen object-cover"
       />
       <GptSearchBar />
       <GptMovieRecommendations />

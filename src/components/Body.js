@@ -21,7 +21,7 @@ const router = createBrowserRouter([
 
 const Body = () => {
   return (
-    <div>
+    <div className="body w-full h-full">
       <RouterProvider router={router} />
     </div>
   );
