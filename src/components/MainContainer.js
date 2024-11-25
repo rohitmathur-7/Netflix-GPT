@@ -4,20 +4,20 @@ import VideoBackground from "./VideoBackground";
 import VideoTitle from "./VideoTitle";
 
 const MainContainer = () => {
-  const movies = useSelector((store) => store.movies?.nowPlayingMovies);
+	const movies = useSelector((store) => store.movies?.nowPlayingMovies);
 
-  if (!movies) return;
+	if (!movies) return;
 
-  const mainMovie = movies[0];
+	const mainMovie = movies[0];
 
-  const { title, overview, id } = mainMovie;
+	const { title, overview, id } = mainMovie;
 
-  return (
-    <div className="main-container">
-      <VideoTitle title={title} overview={overview} />
-      <VideoBackground movieId={id} />
-    </div>
-  );
+	return (
+		<div className="main-container bg-gradient-to-r from-black relative">
+			<VideoTitle title={title} overview={overview} />
+			<VideoBackground movieId={id} />
+		</div>
+	);
 };
 
 export default MainContainer;
