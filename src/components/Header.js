@@ -14,8 +14,12 @@ import { Squash as Hamburger } from "hamburger-react";
 import { FiSearch } from "react-icons/fi";
 import { IoIosLogIn } from "react-icons/io";
 import { AnimatePresence, motion } from "framer-motion";
+import MyAccount from "./MyAccount";
 
 const Header = () => {
+	const [showAccountMenu, setShowAccountMenu] = useState(false);
+	const [timeOutId, setTimeOutId] = useState();
+
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -55,6 +59,19 @@ const Header = () => {
 
 	const handleLanguageChange = (e) => {
 		dispatch(changeLanguage(e.target.value));
+	};
+
+	const handleMouseEnter = () => {
+		clearTimeout(timeOutId);
+		setShowAccountMenu(true);
+	};
+
+	const handleMouseLeave = () => {
+		const timeId = setTimeout(() => {
+			setShowAccountMenu(false);
+		}, 500);
+
+		setTimeOutId(timeId);
 	};
 
 	useEffect(() => {
@@ -99,9 +116,9 @@ const Header = () => {
 				onClick={() => handleGptSearchClick(true)}
 			>
 				<img
-					className="w-[100px] md:w-[150px] lg:w-[200px]"
+					className="w-[100px] md:w-[120px] lg:w-[150px]"
 					src={LOGO}
-					alt="Logo"
+					alt="Netflix Logo"
 				/>
 			</Link>
 			{user && (
@@ -122,9 +139,19 @@ const Header = () => {
 						>
 							{showGptSearch ? "HomePage" : "GPT Search"}
 						</button>
-						<div className="flex flex-col">
-							<img src={user?.photoURL} className="w-12 h-12" />
-							<button onClick={handleSignOut}>Sign Out</button>
+						<div
+							className="flex gap-1 items-center cursor-pointer relative"
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
+						>
+							<img src={user?.photoURL} className="w-8 rounded" />
+							<span className="caret border-solid border-t-white border-l-transparent border-r-transparent border-b-transparent border-t-[5px] border-l-[5px] border-r-[5px] h-0 w-0" />
+							{showAccountMenu && (
+								<MyAccount
+									setShowAccountMenu={setShowAccountMenu}
+									handleSignOut={handleSignOut}
+								/>
+							)}
 						</div>
 					</div>
 					<div className="nav-mobile flex items-center md:hidden">
