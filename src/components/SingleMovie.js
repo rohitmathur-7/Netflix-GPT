@@ -1,19 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useSingleMovieDetails from "../hooks/useSingleMovieDetails";
 import { IMG_CDN_URL } from "../utils/constants";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Header from "./Header";
+import Shimmer from "./Shimmer";
+import { resetSingleMovie } from "../utils/movieSlice";
 
-const SingleMovie = () => {
+const SingleMovie = ({ movie, posterPath }) => {
 	const { movieId } = useParams(); // Get the dynamic title from the URL
+	const dispatch = useDispatch();
 
 	useSingleMovieDetails(movieId);
 
 	const movieData = useSelector((store) => store.movies?.singleMovie);
+
+	// Clear movie data on unmount
+	useEffect(() => {
+		return () => {
+			dispatch(resetSingleMovie());
+		};
+	}, [dispatch]);
+
 	// Check if movieData is available before destructuring
 	if (!movieData) {
-		return <div>Loading...</div>; // You can replace this with a loading spinner if needed
+		return <Shimmer />; // You can replace this with a loading spinner if needed
 	}
 
 	const {
@@ -42,7 +53,7 @@ const SingleMovie = () => {
 	return (
 		<>
 			<Header />
-			<div className="movie-single pt-[48px] md:pt-0">
+			<div className="movie-single pt-[80px] md:pt-0">
 				<div className="movie-container flex-col flex md:flex-row gap-8 bg-black text-white md:h-screen py-4 px-4 md:px-8">
 					<div className="movie-poster order-2 md:order-1 flex items-center basis-[40%] overflow-hidden">
 						<img

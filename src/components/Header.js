@@ -104,7 +104,7 @@ const Header = () => {
 
 	return (
 		<div
-			className={`header cursor-pointer flex items-center justify-between w-screen px-2 md:px-8 fixed z-[2] text-white ${
+			className={`header cursor-pointer flex items-center justify-between w-screen py-4 px-2 md:px-8 pr-0 fixed z-[2] text-white ${
 				(isBrowsePage && !showGptSearch) || isSingleMoviePage
 					? "bg-black"
 					: "bg-gradient-to-b from-black"
@@ -140,12 +140,12 @@ const Header = () => {
 							{showGptSearch ? "HomePage" : "GPT Search"}
 						</button>
 						<div
-							className="flex gap-1 items-center cursor-pointer relative"
+							className="flex gap-1 items-center cursor-pointer relative group"
 							onMouseEnter={handleMouseEnter}
 							onMouseLeave={handleMouseLeave}
 						>
 							<img src={user?.photoURL} className="w-8 rounded" />
-							<span className="caret border-solid border-t-white border-l-transparent border-r-transparent border-b-transparent border-t-[5px] border-l-[5px] border-r-[5px] h-0 w-0" />
+							<span className="caret border-solid border-t-white border-l-transparent border-r-transparent border-b-transparent border-t-[5px] border-l-[5px] border-r-[5px] h-0 w-0 transform transition-transform group-hover:rotate-180" />
 							{showAccountMenu && (
 								<MyAccount
 									setShowAccountMenu={setShowAccountMenu}
@@ -167,7 +167,7 @@ const Header = () => {
 									animate={{ opacity: 1 }}
 									exit={{ opacity: 0 }}
 									transition={{ duration: 0.2 }}
-									className="fixed left-0 right-0 top-[48px] py-8 bg-black"
+									className="fixed left-0 right-0 top-[60px] py-8 bg-black h-full"
 								>
 									<ul className="flex flex-col px-4 gap-8">
 										<motion.li
@@ -205,7 +205,9 @@ const Header = () => {
 													className="text-white flex justify-between items-center w-full"
 													onClick={handleSignOut}
 												>
-													<span className="text-white">Sign Out</span>
+													<button className="text-white cursor-pointer">
+														Sign Out
+													</button>
 													<IoIosLogIn />
 												</button>
 											</div>
