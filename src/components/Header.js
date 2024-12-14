@@ -11,7 +11,7 @@ import { changeLanguage } from "../utils/configSlice";
 import { toggleMobileMenu } from "../utils/configSlice";
 import { Link } from "react-router-dom";
 import { Squash as Hamburger } from "hamburger-react";
-import { FiSearch } from "react-icons/fi";
+import { FiSearch, FiHome } from "react-icons/fi";
 import { IoIosLogIn } from "react-icons/io";
 import { AnimatePresence, motion } from "framer-motion";
 import MyAccount from "./MyAccount";
@@ -39,6 +39,9 @@ const Header = () => {
 	};
 
 	const handleGptSearchClick = (isLogo = false) => {
+		if (isMobileMenuOpen) {
+			dispatch(toggleMobileMenu(false));
+		}
 		if (isLogo) {
 			dispatch(toggleGptSearchView(true));
 			return;
@@ -104,8 +107,10 @@ const Header = () => {
 
 	return (
 		<div
-			className={`header cursor-pointer flex items-center justify-between w-screen py-4 px-2 md:px-8 pr-0 fixed z-[2] text-white ${
-				(isBrowsePage && !showGptSearch) || isSingleMoviePage
+			className={`header cursor-pointer flex items-center justify-between w-screen px-1 md:py-4 px-2 md:px-8 pr-0 fixed z-[2] text-white ${
+				(isBrowsePage && !showGptSearch) ||
+				isMobileMenuOpen ||
+				isSingleMoviePage
 					? "bg-black"
 					: "bg-gradient-to-b from-black"
 			} `}
@@ -140,7 +145,7 @@ const Header = () => {
 							className="bg-red-700 text-white px-4 py-2 rounded-lg"
 							onClick={() => handleGptSearchClick(false)}
 						>
-							{showGptSearch ? "HomePage" : "GPT Search"}
+							{showGptSearch ? "Homepage" : "GPT Search"}
 						</button>
 						<div
 							className="flex gap-1 items-center cursor-pointer relative group"
@@ -188,9 +193,9 @@ const Header = () => {
 												onClick={() => handleGptSearchClick(false)}
 											>
 												<span className="text-white">
-													{showGptSearch ? "HomePage" : "GPT Search"}
+													{showGptSearch ? "Homepage" : "GPT Search"}
 												</span>
-												<FiSearch />
+												{showGptSearch ? <FiHome /> : <FiSearch />}
 											</button>
 										</motion.li>
 										<motion.li

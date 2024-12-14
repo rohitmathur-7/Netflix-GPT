@@ -5,9 +5,9 @@ const Shimmer = () => {
 	return (
 		<>
 			<Header />
-			<div className="flex items-center gap-8 px-8 py-8 h-full">
-				<div className="bg-white opacity-10 rounded-xl w-[30%] h-[70%]"></div>
-				<div className="bg-white opacity-10 rounded-xl w-[80%] h-[70%]"></div>
+			<div className="flex flex-col pt-[60px] md:mt-0 md:flex-row items-center gap-8 px-8 py-8 h-full">
+				<div className="bg-white opacity-10 rounded-xl w-full h-1/2 md:w-[30%] md:h-[70%]"></div>
+				<div className="bg-white opacity-10 rounded-xl w-full h-1/2 md:w-[80%] md:h-[70%]"></div>
 			</div>
 		</>
 	);
