@@ -125,7 +125,10 @@ const Header = () => {
 				<>
 					<div className="nav-desktop hidden md:flex items-center gap-4">
 						{showGptSearch && (
-							<select className="text-black" onChange={handleLanguageChange}>
+							<select
+								className="text-black rounded-[4px]"
+								onChange={handleLanguageChange}
+							>
 								{SUPPORTED_LANGS.map((lang) => (
 									<option key={lang.identifier} value={lang.identifier}>
 										{lang.name}
