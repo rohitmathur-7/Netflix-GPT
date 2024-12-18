@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useSingleMovieDetails from "../hooks/useSingleMovieDetails";
 import { IMG_CDN_URL } from "../utils/constants";

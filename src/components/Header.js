@@ -152,7 +152,11 @@ const Header = () => {
 							onMouseEnter={handleMouseEnter}
 							onMouseLeave={handleMouseLeave}
 						>
-							<img src={user?.photoURL} className="w-8 rounded" />
+							<img
+								src={user?.photoURL}
+								className="w-8 rounded"
+								alt="User Profile Image"
+							/>
 							<span className="caret border-solid border-t-white border-l-transparent border-r-transparent border-b-transparent border-t-[5px] border-l-[5px] border-r-[5px] h-0 w-0 transform transition-transform group-hover:rotate-180" />
 							{showAccountMenu && (
 								<MyAccount

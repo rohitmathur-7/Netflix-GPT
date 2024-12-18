@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Browse from "./Browse";
 import Login from "./Login";
 import SingleMovie from "./SingleMovie";
-import { useSelector, useDispacth } from "react-redux";
+import { useSelector } from "react-redux";
 
 const router = createBrowserRouter([
 	{

@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
-import { addUser, removeUser } from "../utils/userSlice";
+import { addUser } from "../utils/userSlice";
 import { PROFILE_IMG, HOME_BG } from "../utils/constants";
 
 const Login = () => {
@@ -89,7 +89,7 @@ const Login = () => {
 					const errorCode = error.code;
 					const errorMessage = error.message;
 
-					if ("auth/invalid-credential" == errorCode) {
+					if ("auth/invalid-credential" === errorCode) {
 						setAuthError("Invalid Login Credentials. Please try again");
 					} else {
 						setAuthError(errorCode + "-" + errorMessage);

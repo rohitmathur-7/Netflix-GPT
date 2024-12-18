@@ -8,7 +8,7 @@ const MyAccount = ({ showAccountMenu, setShowAccountMenu, handleSignOut }) => {
 	return (
 		<div className="user-details-container absolute flex flex-col justify-center px-4 py-4 opacity-90 gap-4 min-w-[120px] top-[50px] right-0 bg-black">
 			<div className="user-details flex flex-wrap items-center justify-center gap-2">
-				<img className="w-8 rounded" src={user} />
+				<img className="w-8 rounded" src={user} alt="User Profile Image" />
 				<span>{userName}</span>
 			</div>
 			<button

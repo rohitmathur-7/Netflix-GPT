@@ -13,13 +13,13 @@ const VideoTitle = ({ title, overview }) => {
 			<div className="flex gap-4 btn-container md:pt-4 ">
 				<button className="flex items-center text-xs md:text-base gap-2 px-3 py-2 md:px-5 md:py-3 rounded-lg bg-white text-black hover:opacity-80">
 					<div>
-						<img className="w-[16px] md:w-[24px]" src={play} />
+						<img className="w-[16px] md:w-[24px]" src={play} alt="Play Video" />
 					</div>
 					<span>Play</span>
 				</button>
 				<button className="flex items-center text-xs md:text-base gap-2 bg-slate-600 text-white opacity-90 px-3 py-2 md:px-5 md:py-3 rounded-lg hover:opacity-80">
 					<div>
-						<img className="w-[16px] md:w-[24px]" src={info} />
+						<img className="w-[16px] md:w-[24px]" src={info} alt="More Info" />
 					</div>
 					<span>More Info</span>
 				</button>
