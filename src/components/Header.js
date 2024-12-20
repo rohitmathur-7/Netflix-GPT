@@ -179,7 +179,7 @@ const Header = () => {
 									animate={{ opacity: 1 }}
 									exit={{ opacity: 0 }}
 									transition={{ duration: 0.2 }}
-									className="fixed left-0 right-0 top-[60px] py-8 bg-black h-full"
+									className="fixed left-0 right-0 top-[48px] py-8 bg-black h-full"
 								>
 									<ul className="flex flex-col px-4 gap-8">
 										<motion.li
