@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Browse from "./Browse";
 import Login from "./Login";
 import SingleMovie from "./SingleMovie";
+import GptSearch from "./GptSearch";
 import { useSelector } from "react-redux";
 
 const router = createBrowserRouter([
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
 	{
 		path: "/movie/:movieId", // Dynamic route for single movie based on title
 		element: <SingleMovie />,
+	},
+	{
+		path: "/search", // Dynamic route for single movie based on title
+		element: <GptSearch />,
 	},
 ]);
 

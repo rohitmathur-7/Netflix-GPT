@@ -6,10 +6,12 @@ import { useSelector, useDispatch } from "react-redux";
 import Header from "./Header";
 import Shimmer from "./Shimmer";
 import { resetSingleMovie } from "../utils/movieSlice";
+import GptSearch from "./GptSearch";
 
 const SingleMovie = ({ movie, posterPath }) => {
 	const { movieId } = useParams(); // Get the dynamic title from the URL
 	const dispatch = useDispatch();
+	const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
 	useSingleMovieDetails(movieId);
 

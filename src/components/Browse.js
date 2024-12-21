@@ -7,24 +7,18 @@ import SecondaryContainer from "./SecondaryContainer";
 import { useSelector } from "react-redux";
 
 const Browse = () => {
-  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+	const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
-  useNowPlayingMovies();
-  usePopularMovies();
+	useNowPlayingMovies();
+	usePopularMovies();
 
-  return (
-    <div className="flex justify-betwee flex-col">
-      <Header />
-      {showGptSearch ? (
-        <GptSearch />
-      ) : (
-        <>
-          <MainContainer />
-          <SecondaryContainer />
-        </>
-      )}
-    </div>
-  );
+	return (
+		<div className="flex justify-betwee flex-col">
+			<Header />
+			<MainContainer />
+			<SecondaryContainer />
+		</div>
+	);
 };
 
 export default Browse;

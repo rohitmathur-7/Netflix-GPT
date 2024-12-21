@@ -33,6 +33,7 @@ const Header = () => {
 
 	const isBrowsePage = location.pathname.includes("/browse");
 	const isSingleMoviePage = location.pathname.includes("/movie");
+	const isSearchPage = location.pathname.includes("/search");
 
 	const handleMenuOpen = () => {
 		dispatch(toggleMobileMenu(!isMobileMenuOpen));
@@ -91,7 +92,7 @@ const Header = () => {
 					})
 				);
 				// If the current URL does not include "/movie", navigate to /browse
-				if (!isSingleMoviePage) {
+				if (!isSingleMoviePage && !isSearchPage) {
 					navigate("/browse");
 				}
 			} else {
@@ -108,11 +109,7 @@ const Header = () => {
 	return (
 		<div
 			className={`header cursor-pointer flex items-center justify-between w-screen px-1 md:py-4 px-2 md:px-8 pr-0 fixed z-[2] text-white ${
-				(isBrowsePage && !showGptSearch) ||
-				isMobileMenuOpen ||
-				isSingleMoviePage
-					? "bg-black"
-					: "bg-gradient-to-b from-black"
+				!isSearchPage ? "bg-black" : "bg-gradient-to-b from-black"
 			} `}
 		>
 			<Link
@@ -141,12 +138,17 @@ const Header = () => {
 								))}
 							</select>
 						)}
-						<button
-							className="bg-red-700 text-white px-4 py-2 rounded-lg"
-							onClick={() => handleGptSearchClick(false)}
-						>
-							{showGptSearch ? "Homepage" : "GPT Search"}
-						</button>
+						{!isSearchPage && (
+							<Link to="/search">
+								<button
+									className="bg-red-700 text-white px-4 py-2 rounded-lg"
+									onClick={() => handleGptSearchClick(false)}
+								>
+									GPT Search
+								</button>
+							</Link>
+						)}
+
 						<div
 							className="flex gap-1 items-center cursor-pointer relative group"
 							onMouseEnter={handleMouseEnter}
@@ -192,15 +194,17 @@ const Header = () => {
 												delay: 0.1,
 											}}
 										>
-											<button
-												className="text-white rounded-lg flex justify-between items-center w-full"
-												onClick={() => handleGptSearchClick(false)}
-											>
-												<span className="text-white">
-													{showGptSearch ? "Homepage" : "GPT Search"}
-												</span>
-												{showGptSearch ? <FiHome /> : <FiSearch />}
-											</button>
+											{!isSearchPage && (
+												<Link to="/search">
+													<button
+														className="text-white rounded-lg flex justify-between items-center w-full"
+														onClick={() => handleGptSearchClick(false)}
+													>
+														<span className="text-white">GPT Search</span>
+														<FiSearch />
+													</button>
+												</Link>
+											)}
 										</motion.li>
 										<motion.li
 											initial={{ scale: 0, opacity: 0 }}
