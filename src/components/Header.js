@@ -108,8 +108,10 @@ const Header = () => {
 
 	return (
 		<div
-			className={`header cursor-pointer flex items-center justify-between w-screen px-1 md:py-4 px-2 md:px-8 pr-0 fixed z-[2] text-white ${
-				!isSearchPage ? "bg-black" : "bg-gradient-to-b from-black"
+			className={`header cursor-pointer flex items-center justify-between w-screen md:py-4 px-2 md:px-8 md:pl-[18px] pr-0 fixed z-[2] text-white ${
+				isBrowsePage || isSingleMoviePage || isMobileMenuOpen
+					? "bg-black"
+					: "bg-gradient-to-b from-black"
 			} `}
 		>
 			<Link
@@ -183,7 +185,7 @@ const Header = () => {
 									transition={{ duration: 0.2 }}
 									className="fixed left-0 right-0 top-[48px] py-8 bg-black h-full"
 								>
-									<ul className="flex flex-col px-4 gap-8">
+									<ul className="flex flex-col px-4">
 										<motion.li
 											initial={{ scale: 0, opacity: 0 }}
 											animate={{ scale: 1, opacity: 1 }}

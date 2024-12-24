@@ -6,15 +6,15 @@ import { useSelector, useDispatch } from "react-redux";
 import Header from "./Header";
 import Shimmer from "./Shimmer";
 import { resetSingleMovie } from "../utils/movieSlice";
-import GptSearch from "./GptSearch";
 
-const SingleMovie = ({ movie, posterPath }) => {
-	const { movieId } = useParams(); // Get the dynamic title from the URL
+const SingleMovie = () => {
+	const { movieId } = useParams(); // Get the dynamic movie ID from the URL
 	const dispatch = useDispatch();
-	const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
+	// Custom hook to fetch movie details
 	useSingleMovieDetails(movieId);
 
+	// Fetch movie data from the Redux store
 	const movieData = useSelector((store) => store.movies?.singleMovie);
 
 	// Clear movie data on unmount
@@ -24,9 +24,9 @@ const SingleMovie = ({ movie, posterPath }) => {
 		};
 	}, [dispatch]);
 
-	// Check if movieData is available before destructuring
+	// Show a loader if movie data isn't available yet
 	if (!movieData) {
-		return <Shimmer />; // You can replace this with a loading spinner if needed
+		return <Shimmer />;
 	}
 
 	const {
@@ -38,15 +38,13 @@ const SingleMovie = ({ movie, posterPath }) => {
 		release_date,
 		genres,
 	} = movieData;
-	// Title, overview, vote average, genres, release date, runtime
 
+	// Calculate runtime in hours and minutes
 	const hours = Math.floor(runtime / 60);
-	const minutes = runtime - hours * 60;
+	const minutes = runtime % 60;
 
-	const date = new Date(release_date);
-
-	// Convert the date to "30 April 2024"
-	const releaseDate = date.toLocaleDateString("en-GB", {
+	// Format release date as "30 April 2024"
+	const releaseDate = new Date(release_date).toLocaleDateString("en-GB", {
 		day: "numeric",
 		month: "long",
 		year: "numeric",
@@ -55,34 +53,37 @@ const SingleMovie = ({ movie, posterPath }) => {
 	return (
 		<>
 			<Header />
-			<div className="movie-single pt-[80px] md:pt-0">
-				<div className="movie-container flex-col flex md:flex-row gap-8 bg-black text-white md:h-screen py-4 px-4 md:px-8">
-					<div className="movie-poster order-2 md:order-1 flex items-center basis-[40%] overflow-hidden">
+			<div className="movie-single relative pt-[50px] md:pt-[84px] lg:pt-[96px]">
+				<div className="movie-container flex flex-col md:flex-row gap-16 bg-black text-white h-full md:h-[calc(100vh-95px)] px-4 md:px-8 overflow-hidden">
+					{/* Movie Poster */}
+					<div className="movie-poster order-2 md:order-1 flex items-center justify-center overflow-hidden">
 						<img
-							alt="Movie Card"
-							src={IMG_CDN_URL + poster_path}
-							className="object-cover w-full"
+							alt="Movie Poster"
+							src={`${IMG_CDN_URL}${poster_path}`}
+							className="h-full w-auto md:w-full object-contain object-left rounded-lg"
 						/>
 					</div>
-					<div className="movie-content md:order-2 flex flex-col justify-center gap-8 basis-[60%]">
+
+					{/* Movie Content */}
+					<div className="movie-content md:order-2 flex flex-col flex-[1_1_50%] justify-center gap-8 basis-[60%] overflow-y-auto">
+						{/* Title and Overview */}
 						<div>
 							<h2 className="text-[clamp(1.5rem,0.582rem+2.449vw,4.5rem)] pb-4">
 								{title}
 							</h2>
 							<p className="text-xl">{overview}</p>
 						</div>
+
+						{/* Genres */}
 						<div>
-							{genres.map((genre, index) => (
-								<span key={genre.name}>
-									{genre.name}
-									{index < genres.length - 1 ? " |" : ""}{" "}
-								</span>
-							))}
+							<span>{genres.map((genre) => genre.name).join(" | ")}</span>
 						</div>
-						<div className="flex justify-between max-w-[80%] md:max-w-[50%]">
-							<span>⭐️{Math.floor(vote_average)}/10</span>
+
+						{/* Stats */}
+						<div className="flex justify-between [@media(width<=1100px)]:max-w-full [@media(width>1100px)]:max-w-[50%] ">
+							<span>⭐️ {Math.floor(vote_average)}/10</span>
 							<span>
-								{hours}hr {minutes}mins
+								{hours}hr {minutes}min
 							</span>
 							<span>{releaseDate}</span>
 						</div>
