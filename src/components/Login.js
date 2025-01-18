@@ -24,13 +24,17 @@ const Login = () => {
 	const userPassword = useRef(null);
 
 	const handleSignInClick = () => {
+		setEmailError("");
+		setPasswordError("");
+
 		setIsSignIn(!isSignIn);
 	};
 
 	const handleFormSubmission = (e) => {
 		const errors = checkDataValidation(
 			userEmail.current.value,
-			userPassword.current.value
+			userPassword.current.value,
+			isSignIn
 		);
 		setEmailError(errors[0]);
 		setPasswordError(errors[1]);
@@ -105,15 +109,28 @@ const Login = () => {
 				<img
 					src={HOME_BG}
 					alt="Home background"
-					className="absolute top-0 w-screen h-screen object-cover"
+					className="absolute top-0 w-screen h-screen object-cover opacity-50"
 				/>
 				<form
-					className="bg-black flex flex-col text-white px-6 py-8 lg:px-16 lg:py-10 max-w-[300px] lg:max-w-[450px] w-full relative z-0 rounded-xl"
+					className="bg-black/70 flex flex-col text-white px-6 py-8 lg:px-16 max-w-[300px] lg:max-w-[450px] w-full relative z-0 rounded-[4px]"
 					onSubmit={(e) => e.preventDefault()}
 				>
-					<h2 className="text-2xl lg:text-5xl py-4 lg:py-8">
+					<h2 className="text-2xl lg:text-5xl pb-8">
 						{isSignIn ? "Sign In" : "Sign Up"}
 					</h2>
+					{!isSignIn && passwordError && (
+						<div className="invalid-password-error bg-[#D89D31] text-black rounded-[4px] px-8 py-4">
+							<p className="font-bold">Invalid Password</p>
+							<p className="font-medium">
+								Your password must contain atleast 8 characters and:
+							</p>
+							<ul className="list-disc">
+								<li>Contain at least one digit</li>
+								<li>Contain at least one lowercase letter</li>
+								<li>Contain at least one uppercase letter</li>
+							</ul>
+						</div>
+					)}
 					<div className="flex flex-col gap-4">
 						{!isSignIn && (
 							<>
@@ -127,7 +144,9 @@ const Login = () => {
 								/>
 							</>
 						)}
-						<label htmlFor="email-id"></label>
+						<label htmlFor="email-id" className="sr-only">
+							Email
+						</label>
 						<input
 							id="email-id"
 							type="text"
@@ -136,9 +155,13 @@ const Login = () => {
 							ref={userEmail}
 						/>
 						{emailError && (
-							<span className="email-error form-error">{emailError}</span>
+							<span className="email-error form-error relative pl-[1.3rem]">
+								{emailError}
+							</span>
 						)}
-						<label htmlFor="password"></label>
+						<label htmlFor="password" className="sr-only">
+							Password
+						</label>
 						<input
 							id="password"
 							type="text"
@@ -159,10 +182,27 @@ const Login = () => {
 						>
 							{isSignIn ? "Sign In" : "Sign Up"}
 						</button>
-
-						<p className="cursor-pointer" onClick={(e) => handleSignInClick(e)}>
-							New to Netflix? {isSignIn ? "Sign up now" : "Sign In Now"}
-						</p>
+						{isSignIn ? (
+							<p className="text-white/70">
+								New to Netflix?&nbsp;
+								<span
+									className="cursor-pointer font-bold text-white"
+									onClick={(e) => handleSignInClick(e)}
+								>
+									Sign up now
+								</span>
+							</p>
+						) : (
+							<p className="text-white/70">
+								Already Have an account?&nbsp;
+								<span
+									className="cursor-pointer font-bold text-white"
+									onClick={(e) => handleSignInClick(e)}
+								>
+									Sign in now
+								</span>
+							</p>
+						)}
 					</div>
 				</form>
 			</div>

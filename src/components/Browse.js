@@ -15,8 +15,10 @@ const Browse = () => {
 	return (
 		<div className="flex justify-betwee flex-col">
 			<Header />
-			<MainContainer />
-			<SecondaryContainer />
+			<div className="px-4 overflow-hidden">
+				<MainContainer />
+				<SecondaryContainer />
+			</div>
 		</div>
 	);
 };

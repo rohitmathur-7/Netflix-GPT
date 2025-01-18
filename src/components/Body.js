@@ -4,6 +4,7 @@ import Login from "./Login";
 import SingleMovie from "./SingleMovie";
 import GptSearch from "./GptSearch";
 import { useSelector } from "react-redux";
+import Footer from "./Footer";
 
 const router = createBrowserRouter([
 	{
@@ -34,6 +35,7 @@ const Body = () => {
 			className={`body w-full h-full ${isMobileMenuOpen && "overflow-hidden"} `}
 		>
 			<RouterProvider router={router} />
+			<Footer />
 		</div>
 	);
 };

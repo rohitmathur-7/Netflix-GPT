@@ -1,16 +1,19 @@
 import "./App.css";
 import Body from "./components/Body";
 import { Provider } from "react-redux";
-import appStore from "./utils/appStore";
+import { PersistGate } from "redux-persist/integration/react";
+import appStore, { persistor } from "./utils/appStore";
 
 function App() {
-  return (
-    <div className="app w-screen h-screen">
-      <Provider store={appStore}>
-        <Body />
-      </Provider>
-    </div>
-  );
+	return (
+		<div className="app w-screen h-screen">
+			<Provider store={appStore}>
+				<PersistGate loading={null} persistor={persistor}>
+					<Body />
+				</PersistGate>
+			</Provider>
+		</div>
+	);
 }
 
 export default App;

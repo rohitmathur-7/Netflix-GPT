@@ -34,6 +34,7 @@ const Header = () => {
 	const isBrowsePage = location.pathname.includes("/browse");
 	const isSingleMoviePage = location.pathname.includes("/movie");
 	const isSearchPage = location.pathname.includes("/search");
+	const isLoginPage = !isBrowsePage && !isSingleMoviePage && !isSearchPage;
 
 	const handleMenuOpen = () => {
 		dispatch(toggleMobileMenu(!isMobileMenuOpen));
@@ -108,7 +109,9 @@ const Header = () => {
 
 	return (
 		<div
-			className={`header cursor-pointer flex items-center justify-between w-screen md:py-4 px-2 md:px-8 md:pl-[18px] pr-0 fixed z-[2] text-white ${
+			className={`header cursor-pointer flex items-center justify-between w-screen md:py-4 px-2 md:px-8 md:pl-[18px] pr-0 ${
+				!isLoginPage && "fixed"
+			} z-[2] text-white ${
 				isBrowsePage || isSingleMoviePage || isMobileMenuOpen
 					? "bg-black"
 					: "bg-gradient-to-b from-black"
