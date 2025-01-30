@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { IMG_CDN_URL } from "../utils/constants";
 import SingleMovie from "./SingleMovie";
+import { CiCirclePlus } from "react-icons/ci";
+import { IoPlayCircleOutline } from "react-icons/io5";
+import { movieGenres } from "../utils/movieGeneres";
 
 const MovieCard = ({
 	movie,
@@ -10,12 +13,15 @@ const MovieCard = ({
 	containerOffsetLeft,
 	firstMovie,
 	lastMovie,
+	lastList,
 }) => {
 	const [showSingleMovie, setShowSingleMovie] = useState(false);
 	const [isHover, setIsHover] = useState(false);
 	const cardRef = useRef(null); // To track the card's position
 	const hoverTimeoutRef = useRef(null); // To store the timeout ID
 	const [cardLeftPosition, setCardLeftPosition] = useState(0);
+
+	const movieGenereIds = movie.genre_ids.slice(0, 2);
 
 	// Calculate the card's position unconditionally
 	useEffect(() => {
@@ -71,19 +77,44 @@ const MovieCard = ({
 					className={`movie-card-hover w-48 h-full cursor-pointer absolute z-10 transition-transform transform scale-[1.5]`}
 					style={{
 						left: firstMovie
-							? `${cardLeftPosition + 80}px`
+							? `${cardLeftPosition + 60}px`
 							: lastMovie
 							? `${cardLeftPosition}px`
 							: `${cardLeftPosition + 50}px`,
-						top: "25%",
+						top: lastList ? "-15%" : "25%",
 					}}
 					onMouseLeave={handleMouseLeave}
 				>
-					<img
-						alt="Movie Card"
-						src={IMG_CDN_URL + posterPath}
-						className="rounded-md"
-					/>
+					<div>
+						<img
+							alt="Movie Card"
+							src={IMG_CDN_URL + posterPath}
+							className="rounded-md"
+						/>
+						<div className="flex flex-col gap-2 bg-[#141414] text-white p-4">
+							<div className="flex">
+								<IoPlayCircleOutline
+									size={24}
+									className="text-gray-400 hover:text-white"
+								/>
+								<CiCirclePlus
+									size={24}
+									className="text-gray-400 hover:text-white"
+								/>
+							</div>
+							<div className="flex flex-wrap gap-1 text-xs">
+								{movieGenereIds.map((id, idx) => (
+									<p key={id}>
+										{idx === 1
+											? movieGenres[id]
+											: `${movieGenres[id]} ${
+													movieGenereIds.length > 1 ? "|" : ""
+											  }`}
+									</p>
+								))}
+							</div>
+						</div>
+					</div>
 				</div>
 			)}
 		</div>
