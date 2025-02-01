@@ -53,7 +53,7 @@ const SingleMovie = () => {
 	return (
 		<>
 			<Header />
-			<div className="movie-single relative pt-[50px] md:pt-[84px] lg:pt-[96px]">
+			<div className="movie-single relative pt-[50px] md:pt-[84px] lg:pt-[96px] pb-[100px]">
 				<div className="movie-container flex flex-col md:flex-row gap-16 bg-black text-white h-full md:h-[calc(100vh-95px)] px-4 md:px-8 overflow-hidden">
 					{/* Movie Poster */}
 					<div className="movie-poster order-2 md:order-1 flex items-center justify-center overflow-hidden">

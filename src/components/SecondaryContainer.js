@@ -8,7 +8,7 @@ const SecondaryContainer = () => {
 	return (
 		movies && (
 			<div className="secondary-container bg-black">
-				<div className="[@media(width<=550px)]:mt-0 -mt-[10%] md:-mt-[15%] z-[1] relative">
+				<div className="[@media(width<=550px)]:mt-0 -mt-[10%] md:-mt-[15%] z-[1] relative flex flex-col gap-4 pb-[100px]">
 					<MovieList
 						title={"Now Playing"}
 						movies={movies.nowPlayingMovies}
@@ -28,6 +28,7 @@ const SecondaryContainer = () => {
 						title={"Popular Movies"}
 						movies={movies.popularMovies}
 						isGptMovies={false}
+						lastList={true}
 					/>
 				</div>
 			</div>

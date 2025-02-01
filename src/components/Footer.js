@@ -6,7 +6,7 @@ import youtubeLogo from "../assets/images/svgexport-17.svg";
 
 const Footer = () => {
 	return (
-		<div className="footer text-[#808080] pt-[100px]">
+		<div className="footer text-[#808080]">
 			<div className="flex flex-col gap-4 max-w-[980px] m-auto">
 				<div className="social-links flex gap-8 opacity-100">
 					<a href="https://www.facebook.com/">

@@ -80,7 +80,7 @@ const MovieCard = ({
 							? `${cardLeftPosition + 60}px`
 							: lastMovie
 							? `${cardLeftPosition}px`
-							: `${cardLeftPosition + 50}px`,
+							: `${cardLeftPosition + 30}px`,
 						top: lastList ? "-15%" : "25%",
 					}}
 					onMouseLeave={handleMouseLeave}
