@@ -14,7 +14,9 @@ const MovieCard = ({
 	firstMovie,
 	lastMovie,
 	lastList,
+	cardWidth,
 }) => {
+	console.log("🚀 ~ cardWidth:", cardWidth);
 	const [showSingleMovie, setShowSingleMovie] = useState(false);
 	const [isHover, setIsHover] = useState(false);
 	const cardRef = useRef(null); // To track the card's position
@@ -61,10 +63,13 @@ const MovieCard = ({
 	return !showSingleMovie ? (
 		<div ref={cardRef}>
 			<div
-				className={`w-48 h-full cursor-pointer`}
+				className={`h-full cursor-pointer`}
 				onClick={handleMovieClick}
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeaveMain}
+				style={{
+					width: cardWidth,
+				}}
 			>
 				<img
 					alt="Movie Card"
@@ -74,14 +79,15 @@ const MovieCard = ({
 			</div>
 			{isHover && (
 				<div
-					className={`movie-card-hover w-48 h-full cursor-pointer absolute z-10 transition-transform transform scale-[1.5]`}
+					className={`movie-card-hover h-full cursor-pointer absolute z-10 transition-transform transform scale-[1.3]`}
 					style={{
+						width: cardWidth,
 						left: firstMovie
 							? `${cardLeftPosition + 60}px`
 							: lastMovie
 							? `${cardLeftPosition}px`
 							: `${cardLeftPosition + 30}px`,
-						top: lastList ? "-15%" : "25%",
+						top: lastList ? "-8%" : "0",
 					}}
 					onMouseLeave={handleMouseLeave}
 				>

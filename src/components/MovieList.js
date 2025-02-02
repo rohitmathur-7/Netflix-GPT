@@ -50,9 +50,7 @@ const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
 	const scrollToPrev = () => {
 		if (scrollContainerRef.current) {
 			const { scrollLeft, clientWidth } = scrollContainerRef.current;
-			console.log("🚀 ~ scrollToPrev ~ scrollLeft:", scrollLeft);
-			console.log("🚀 ~ scrollToPrev ~ clientWidth:", clientWidth);
-			console.log(scrollLeft - clientWidth);
+
 			scrollContainerRef.current.scrollTo({
 				left: scrollLeft - clientWidth,
 				behavior: "smooth",
@@ -74,6 +72,8 @@ const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
 			return () => container.removeEventListener("scroll", handleScroll);
 		}
 	}, []);
+
+	console.log(scrollContainerRef.current?.clientWidth);
 
 	return (
 		<div className="movie-list relative">
@@ -104,6 +104,11 @@ const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
 									firstMovie={idx === 0 ? 1 : 0}
 									lastMovie={idx === duplicatedMovies.length - 1 ? 1 : 0}
 									lastList={lastList}
+									cardWidth={
+										Math.floor(
+											(scrollContainerRef.current?.clientWidth - 80) / 5
+										) || 0
+									}
 								/>
 							</Link>
 						))}
