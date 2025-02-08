@@ -26,15 +26,15 @@ const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
 			<h1 className="text-2xl pb-4 text-white">{title}</h1>
 			<div className="relative">
 				<Slider {...settings}>
-					{duplicatedMovies?.map((movie, idx) => (
+					{safeMovies?.map((movie, idx) => (
 						<Link to={"/movie/" + movie.id} key={idx}>
 							<MovieCard
 								movie={movie}
 								key={idx}
 								posterPath={movie.backdrop_path}
 								isGptMovies={isGptMovies}
-								firstMovie={idx === 0 ? 1 : 0}
-								lastMovie={idx === duplicatedMovies.length - 1 ? 1 : 0}
+								firstMovie={idx === 0 || idx % 5 === 0 ? 1 : 0}
+								lastMovie={(idx + 1) % 5 === 0 ? 1 : 0}
 								lastList={lastList}
 								onHoverChange={setIsHovered} // Pass the function to change z-index
 							/>

@@ -76,9 +76,12 @@ const MovieCard = ({
 			</div>
 			{isHover && (
 				<div
-					className={`movie-card-hover cursor-pointer absolute z-[100] transition-transform transform scale-[1.3]`}
+					className={`movie-card-hover cursor-pointer absolute z-[100] transition-transform`}
 					style={{
 						top: lastList ? "-8%" : "0",
+						transform: `translateX(${
+							firstMovie ? "45px" : lastMovie ? "-45px" : "0"
+						}) scale(1.3)`,
 					}}
 					onMouseLeave={handleMouseLeave}
 				>
