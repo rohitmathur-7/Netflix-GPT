@@ -12,8 +12,8 @@ const MovieCard = ({
 	firstMovie,
 	lastMovie,
 	lastList,
+	onHoverChange, // Receive function from MovieList
 }) => {
-	console.log("🚀 ~ movie:", movie);
 	const [showSingleMovie, setShowSingleMovie] = useState(false);
 	const [isHover, setIsHover] = useState(false);
 	const cardRef = useRef(null); // To track the card's position
@@ -22,8 +22,6 @@ const MovieCard = ({
 	const [imgWidth, setImgWidth] = useState(0);
 	const movieCardImgRef = useRef(null);
 	const movieGenereIds = movie.genre_ids.slice(0, 2);
-
-	console.log("🚀 ~ imgWidth:", imgWidth);
 
 	useEffect(() => {
 		if (movieCardImgRef.current) {
@@ -43,12 +41,16 @@ const MovieCard = ({
 	const handleMouseEnter = () => {
 		hoverTimeoutRef.current = setTimeout(() => {
 			setIsHover(true);
+			onHoverChange(true); // Increase z-index in MovieList
+
+			// Calculate the left position of the movie-card-hover
 		}, 800);
 	};
 
 	const handleMouseLeave = () => {
 		clearTimeout(hoverTimeoutRef.current);
 		setIsHover(false);
+		onHoverChange(false); // Reset z-index in MovieList
 	};
 
 	const handleMouseLeaveMain = () => {
@@ -60,7 +62,7 @@ const MovieCard = ({
 	return !showSingleMovie ? (
 		<div ref={cardRef}>
 			<div
-				className={`movie-card h-full cursor-pointer`}
+				className={`movie-card h-full cursor-pointer relative z-10`}
 				onClick={handleMovieClick}
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeaveMain}
@@ -74,7 +76,7 @@ const MovieCard = ({
 			</div>
 			{isHover && (
 				<div
-					className={`movie-card-hover cursor-pointer absolute z-10 transition-transform transform scale-[1.3]`}
+					className={`movie-card-hover cursor-pointer absolute z-[100] transition-transform transform scale-[1.3]`}
 					style={{
 						top: lastList ? "-8%" : "0",
 					}}
