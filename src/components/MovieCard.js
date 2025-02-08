@@ -9,30 +9,27 @@ const MovieCard = ({
 	movie,
 	posterPath,
 	isGptMovies,
-	scrollOffset,
-	containerOffsetLeft,
 	firstMovie,
 	lastMovie,
 	lastList,
-	cardWidth,
 }) => {
-	console.log("🚀 ~ cardWidth:", cardWidth);
+	console.log("🚀 ~ movie:", movie);
 	const [showSingleMovie, setShowSingleMovie] = useState(false);
 	const [isHover, setIsHover] = useState(false);
 	const cardRef = useRef(null); // To track the card's position
 	const hoverTimeoutRef = useRef(null); // To store the timeout ID
 	const [cardLeftPosition, setCardLeftPosition] = useState(0);
-
+	const [imgWidth, setImgWidth] = useState(0);
+	const movieCardImgRef = useRef(null);
 	const movieGenereIds = movie.genre_ids.slice(0, 2);
 
-	// Calculate the card's position unconditionally
+	console.log("🚀 ~ imgWidth:", imgWidth);
+
 	useEffect(() => {
-		if (cardRef.current) {
-			// Calculate the card's position relative to the container
-			const cardPosition = cardRef.current.offsetLeft - containerOffsetLeft;
-			setCardLeftPosition(cardPosition - scrollOffset);
+		if (movieCardImgRef.current) {
+			setImgWidth(movieCardImgRef.current.clientWidth);
 		}
-	}, [scrollOffset, containerOffsetLeft]);
+	}, [posterPath]);
 
 	// If no posterPath is provided, render null (outside the hook)
 	if (!posterPath) {
@@ -63,30 +60,22 @@ const MovieCard = ({
 	return !showSingleMovie ? (
 		<div ref={cardRef}>
 			<div
-				className={`h-full cursor-pointer`}
+				className={`movie-card h-full cursor-pointer`}
 				onClick={handleMovieClick}
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeaveMain}
-				style={{
-					width: cardWidth,
-				}}
 			>
 				<img
 					alt="Movie Card"
 					src={IMG_CDN_URL + posterPath}
 					className="rounded-md"
+					ref={movieCardImgRef}
 				/>
 			</div>
 			{isHover && (
 				<div
-					className={`movie-card-hover h-full cursor-pointer absolute z-10 transition-transform transform scale-[1.3]`}
+					className={`movie-card-hover cursor-pointer absolute z-10 transition-transform transform scale-[1.3]`}
 					style={{
-						width: cardWidth,
-						left: firstMovie
-							? `${cardLeftPosition + 60}px`
-							: lastMovie
-							? `${cardLeftPosition}px`
-							: `${cardLeftPosition + 30}px`,
 						top: lastList ? "-8%" : "0",
 					}}
 					onMouseLeave={handleMouseLeave}
@@ -96,6 +85,9 @@ const MovieCard = ({
 							alt="Movie Card"
 							src={IMG_CDN_URL + posterPath}
 							className="rounded-md"
+							style={{
+								width: imgWidth,
+							}}
 						/>
 						<div className="flex flex-col gap-2 bg-[#141414] text-white p-4">
 							<div className="flex">

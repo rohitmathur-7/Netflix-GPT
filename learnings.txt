@@ -1,0 +1,7 @@
+Issues Faced:
+
+Movie Slider:
+- Tried creating custom slider for the movie list, did make it also but faced issue with the width of the slides
+ as when screen size increased the previous and next slides started showing in the viewport which was getting difficult
+ manage hence opted to used a Slick slider react component.
+  

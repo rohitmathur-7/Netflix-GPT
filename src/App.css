@@ -88,8 +88,37 @@
 .snap-x {
 	scroll-snap-type: x mandatory;
 }
+
 .snap-start {
 	scroll-snap-align: start;
+}
+
+.slick-list {
+	overflow: visible !important;
+}
+
+/* Add a gap between slides */
+.slick-slide > div {
+	margin: 0 0.5rem; /* Add 0.5rem margin on both sides (total 1rem gap) */
+}
+
+/* Ensure the first and last slides align properly */
+.slick-list {
+	margin: 0 -0.5rem !important; /* Compensate for the margin added to slides */
+}
+
+.slick-prev {
+	left: 10px !important;
+	z-index: 1;
+}
+
+.slick-next {
+	right: 10px !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+	font-size: 35px !important;
 }
 
 @keyframes App-logo-spin {
