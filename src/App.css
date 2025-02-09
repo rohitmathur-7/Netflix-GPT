@@ -121,6 +121,23 @@
 	font-size: 35px !important;
 }
 
+@media (max-width: 1023px) {
+	.slick-prev {
+		left: -15px !important;
+	}
+
+	.slick-next {
+		right: -1px !important;
+	}
+}
+
+@media (max-width: 600px) {
+	.slick-prev:before,
+	.slick-next:before {
+		font-size: 25px !important;
+	}
+}
+
 @keyframes App-logo-spin {
 	from {
 		transform: rotate(0deg);
