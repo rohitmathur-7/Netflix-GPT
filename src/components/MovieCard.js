@@ -105,6 +105,9 @@ const MovieCard = ({
 									className="text-gray-400 hover:text-white"
 								/>
 							</div>
+							<div>
+								<h3>{movie.title}</h3>
+							</div>
 							<div className="flex flex-wrap gap-1 text-xs">
 								{movieGenereIds.map((id, idx) => (
 									<p key={id}>

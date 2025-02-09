@@ -9,6 +9,7 @@ const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
 	const safeMovies = Array.isArray(movies) ? movies : [];
 	const duplicatedMovies = [...safeMovies, ...safeMovies]; // Two sets are enough for viewport-width scrolling
 	const [isHovered, setIsHovered] = useState(false);
+	const [isHoveredMovieList, setIsHoveredMovieList] = useState(false);
 
 	const settings = {
 		dots: false,
@@ -16,6 +17,7 @@ const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
 		speed: 500,
 		slidesToShow: 5,
 		slidesToScroll: 5,
+		arrows: window.innerWidth <= 1023 || isHoveredMovieList,
 		responsive: [
 			{
 				breakpoint: 1024,
@@ -40,7 +42,11 @@ const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
 			style={{ zIndex: isHovered ? 10 : 5, position: "relative" }}
 		>
 			<h1 className="text-2xl pb-4 text-white">{title}</h1>
-			<div className="relative">
+			<div
+				className="relative"
+				onMouseEnter={() => setIsHoveredMovieList(true)}
+				onMouseLeave={() => setIsHoveredMovieList(false)}
+			>
 				<Slider {...settings}>
 					{safeMovies?.map((movie, idx) => (
 						<Link to={"/movie/" + movie.id} key={idx}>
