@@ -27,7 +27,7 @@ const MovieCard = ({
 		if (movieCardImgRef.current) {
 			setImgWidth(movieCardImgRef.current.clientWidth);
 		}
-	}, [posterPath]);
+	}, [posterPath, isHover]);
 
 	// If no posterPath is provided, render null (outside the hook)
 	if (!posterPath) {
