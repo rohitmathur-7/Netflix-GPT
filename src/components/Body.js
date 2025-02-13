@@ -4,7 +4,7 @@ import Login from "./Login";
 import SingleMovie from "./SingleMovie";
 import GptSearch from "./GptSearch";
 import { useSelector } from "react-redux";
-import Footer from "./Footer";
+import MyList from "./MyList";
 
 const router = createBrowserRouter([
 	{
@@ -23,6 +23,10 @@ const router = createBrowserRouter([
 		path: "/search", // Dynamic route for single movie based on title
 		element: <GptSearch />,
 	},
+	{
+		path: "/my-list",
+		element: <MyList />,
+	},
 ]);
 
 const Body = () => {
@@ -35,7 +39,6 @@ const Body = () => {
 			className={`body w-full h-full ${isMobileMenuOpen && "overflow-hidden"} `}
 		>
 			<RouterProvider router={router} />
-			<Footer />
 		</div>
 	);
 };

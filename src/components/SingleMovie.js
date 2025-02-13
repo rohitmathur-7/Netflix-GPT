@@ -4,6 +4,7 @@ import useSingleMovieDetails from "../hooks/useSingleMovieDetails";
 import { IMG_CDN_URL } from "../utils/constants";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "./Header";
+import Footer from "./Footer";
 import Shimmer from "./Shimmer";
 import { resetSingleMovie } from "../utils/movieSlice";
 
@@ -90,6 +91,7 @@ const SingleMovie = () => {
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</>
 	);
 };

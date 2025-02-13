@@ -2,6 +2,7 @@ import React from "react";
 import GptSearchBar from "./GptSearchBar";
 import GptMovieRecommendations from "./GptMovieRecommendations";
 import Header from "./Header";
+import Footer from "./Footer";
 import { HOME_BG } from "../utils/constants";
 
 const GptSearch = () => {
@@ -17,6 +18,7 @@ const GptSearch = () => {
 				<GptSearchBar />
 				<GptMovieRecommendations />
 			</div>
+			<Footer />
 		</>
 	);
 };

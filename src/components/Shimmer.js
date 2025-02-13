@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const Shimmer = () => {
 	return (
@@ -9,6 +10,7 @@ const Shimmer = () => {
 				<div className="bg-white opacity-10 rounded-xl w-full h-1/2 md:w-[30%] md:h-[70%]"></div>
 				<div className="bg-white opacity-10 rounded-xl w-full h-1/2 md:w-[80%] md:h-[70%]"></div>
 			</div>
+			<Footer />
 		</>
 	);
 };
