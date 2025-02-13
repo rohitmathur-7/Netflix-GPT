@@ -7,6 +7,7 @@ const movieSlice = createSlice({
 		popularMovies: null,
 		trailerVideo: null,
 		singleMovie: null,
+		wishlist: [],
 	},
 	reducers: {
 		addNowPlayingMovies: (state, action) => {
@@ -24,6 +25,18 @@ const movieSlice = createSlice({
 		resetSingleMovie: (state) => {
 			state.singleMovie = null;
 		},
+		// Add to wishlist reducer
+		addToWishlist: (state, action) => {
+			const movie = action.payload;
+			if (!state.wishlist.some((m) => m.id === movie.id)) {
+				state.wishlist.push(movie);
+			}
+		},
+		// Remove from wishlist reducer
+		removeFromWishlist: (state, action) => {
+			const movieId = action.payload;
+			state.wishlist = state.wishlist.filter((m) => m.id !== movieId);
+		},
 	},
 });
 
@@ -33,6 +46,8 @@ export const {
 	addTrailerVideo,
 	addSingleMovie,
 	resetSingleMovie,
+	addToWishlist,
+	removeFromWishlist,
 } = movieSlice.actions;
 
 export default movieSlice.reducer;

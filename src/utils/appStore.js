@@ -13,12 +13,19 @@ const gptPersistConfig = {
 	whitelist: ["movieNames", "movieResults"], // Only persist these fields
 };
 
+const moviePersistConfig = {
+	key: "movies",
+	storage,
+	whitelist: ["wishlist"], // Persist only the wishlist
+};
+
 const persistedGptReducer = persistReducer(gptPersistConfig, gptReducer);
+const persistedMovieReducer = persistReducer(moviePersistConfig, moviesReducer);
 
 const appStore = configureStore({
 	reducer: {
 		user: userReducer,
-		movies: moviesReducer,
+		movies: persistedMovieReducer,
 		gpt: persistedGptReducer,
 		config: configReducer,
 	},
