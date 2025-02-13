@@ -99,7 +99,7 @@ const MovieCard = ({
 					}}
 					onMouseLeave={handleMouseLeave}
 				>
-					<div className="z-[100]">
+					<div>
 						<img
 							alt="Movie Card"
 							src={IMG_CDN_URL + posterPath}
@@ -108,7 +108,7 @@ const MovieCard = ({
 								width: imgWidth,
 							}}
 						/>
-						<div className="flex flex-col gap-2 bg-[#141414] text-white p-4 z-[100]">
+						<div className="flex flex-col gap-2 bg-[#141414] text-white p-4">
 							<div className="flex">
 								<IoPlayCircleOutline
 									size={24}
