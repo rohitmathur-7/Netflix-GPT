@@ -60,8 +60,8 @@ const GptSearchBar = () => {
 	return (
 		<div
 			className={`${
-				tmdbResultsState.length ? "pt-[15vh]" : "pt-[35vh]"
-			}  lg:pt-[30vh] w-full px-4 lg:w-1/2 lg:px-0 m-auto relative z-0`}
+				tmdbResultsState.length ? "pt-[15vh]" : "pt-[20vh]"
+			} w-full px-4 lg:w-1/2 lg:px-0 m-auto relative z-0`}
 		>
 			<form
 				className="bg-black flex justify-between py-8 px-4 rounded-lg gap-4 shadow-2xl [@media(width<=600px)]:flex-col"

@@ -6,24 +6,30 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
-	const safeMovies = Array.isArray(movies) ? movies : [];
-	const duplicatedMovies = [...safeMovies, ...safeMovies]; // Two sets are enough for viewport-width scrolling
+	const safeMovies = Array.isArray(movies)
+		? movies.filter((movie) => movie.backdrop_path)
+		: [];
 	const [isHovered, setIsHovered] = useState(false);
 	const [isHoveredMovieList, setIsHoveredMovieList] = useState(false);
+	const shouldShowArrows = safeMovies.length > 5;
+	const shouldEnableInfinite = safeMovies.length > 5;
 
 	const settings = {
 		dots: false,
-		infinite: true,
+		infinite: shouldEnableInfinite,
 		speed: 500,
 		slidesToShow: 5,
 		slidesToScroll: 5,
-		arrows: window.innerWidth <= 1023 || isHoveredMovieList,
+		arrows:
+			shouldShowArrows && (window.innerWidth <= 1023 || isHoveredMovieList),
 		responsive: [
 			{
 				breakpoint: 1024,
 				settings: {
 					slidesToShow: 3,
 					slidesToScroll: 3,
+					arrows: 3,
+					infinite: 3,
 				},
 			},
 			{
@@ -31,6 +37,8 @@ const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
 				settings: {
 					slidesToShow: 2,
 					slidesToScroll: 2,
+					arrows: 2,
+					infinite: 2,
 				},
 			},
 		],
@@ -41,7 +49,7 @@ const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
 			className="movie-list relative z-[5]"
 			style={{ zIndex: isHovered ? 10 : 5, position: "relative" }}
 		>
-			<h1 className="text-2xl pb-4 text-white">{title}</h1>
+			<h1 className="text-2xl pb-4 text-white pl-4">{title}</h1>
 			<div
 				className="relative"
 				onMouseEnter={() => setIsHoveredMovieList(true)}

@@ -34,6 +34,7 @@ const Header = () => {
 	const isBrowsePage = location.pathname.includes("/browse");
 	const isSingleMoviePage = location.pathname.includes("/movie");
 	const isSearchPage = location.pathname.includes("/search");
+	const isMyListPage = location.pathname.includes("/my-list");
 	const isLoginPage = !isBrowsePage && !isSingleMoviePage && !isSearchPage;
 
 	const handleMenuOpen = () => {
@@ -93,7 +94,7 @@ const Header = () => {
 					})
 				);
 				// If the current URL does not include "/movie", navigate to /browse
-				if (!isSingleMoviePage && !isSearchPage) {
+				if (!isSingleMoviePage && !isSearchPage && !isMyListPage) {
 					navigate("/browse");
 				}
 			} else {

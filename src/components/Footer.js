@@ -1,15 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import facebookLogo from "../assets/images/facebook.svg";
 import instagramLogo from "../assets/images/svgexport-15.svg";
 import twitterLogo from "../assets/images/svgexport-16.svg";
 import youtubeLogo from "../assets/images/svgexport-17.svg";
 
 const Footer = () => {
-	const navigate = useNavigate();
-
 	return (
-		<div className="footer text-[#808080]">
+		<div className="footer text-[#808080] bg-black relative z-[1]">
 			<div className="flex flex-col gap-4 max-w-[980px] m-auto">
 				<div className="social-links flex gap-8 opacity-100">
 					<a href="https://www.facebook.com/">
@@ -30,8 +28,8 @@ const Footer = () => {
 					<ul className="flex flex-wrap justify-between">
 						<li>Terms of use</li>
 						<li>Privacy</li>
-						<li onClick={() => navigate("/my-list")}>
-							<button>Wishlist</button>
+						<li>
+							<Link to="/my-list">Wishlist</Link>
 						</li>
 						<li>GPT Search</li>
 					</ul>

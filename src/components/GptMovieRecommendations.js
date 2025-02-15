@@ -8,7 +8,7 @@ const GptMovieRecommendations = () => {
 	if (!movieResults) return;
 
 	return (
-		<div className="movie-recommendations relative z-0 bg-opacity-80 bg-black mt-[50px]">
+		<div className="movie-recommendations overflow-y-visible relative z-0 bg-opacity-80 bg-black mt-[50px] py-[20px]">
 			<MovieList
 				title="Suggested Movies"
 				movies={movieResults}
