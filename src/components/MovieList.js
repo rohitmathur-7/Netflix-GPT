@@ -21,7 +21,7 @@ const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
 		slidesToShow: 5,
 		slidesToScroll: 5,
 		arrows:
-			shouldShowArrows && (window.innerWidth <= 1023 || isHoveredMovieList),
+			shouldShowArrows && (window.innerWidth <= 1024 || isHoveredMovieList),
 		responsive: [
 			{
 				breakpoint: 1024,
