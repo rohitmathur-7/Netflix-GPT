@@ -95,7 +95,7 @@ const MovieCard = ({
 						top: lastList ? "-8%" : "0",
 						transform: `translateX(${
 							firstMovie ? "45px" : lastMovie ? "-45px" : "0"
-						}) scale(1.3)`,
+						}) scale(1)`,
 					}}
 					onMouseLeave={handleMouseLeave}
 				>
@@ -114,7 +114,6 @@ const MovieCard = ({
 									size={24}
 									className="text-gray-400 hover:text-white"
 								/>
-								{/* Toggle between plus and tick icon */}
 								{isMovieInWishlist ? (
 									<CiCircleCheck
 										size={24}
