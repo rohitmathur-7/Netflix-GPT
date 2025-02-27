@@ -24,6 +24,7 @@ const MovieCard = ({
 	const [isScalingDown, setIsScalingDown] = useState(false);
 	const cardRef = useRef(null);
 	const hoverTimeoutRef = useRef(null);
+	const scaleDownTimeOutRef = useRef(null);
 	const movieCardImgRef = useRef(null);
 	const movieGenereIds = movie.genre_ids.slice(0, 2);
 
@@ -45,6 +46,8 @@ const MovieCard = ({
 	};
 
 	const handleMouseEnter = () => {
+		clearTimeout(scaleDownTimeOutRef.current);
+
 		hoverTimeoutRef.current = setTimeout(() => {
 			setIsHover(true);
 			onHoverChange(true);
@@ -55,11 +58,11 @@ const MovieCard = ({
 		clearTimeout(hoverTimeoutRef.current);
 
 		setIsScalingDown(true); // Trigger scale-down animation
-		setTimeout(() => {
+		scaleDownTimeOutRef.current = setTimeout(() => {
 			setIsHover(false);
 			onHoverChange(false);
 			setIsScalingDown(false); // Reset scale-down state
-		}, 100);
+		}, 200);
 	};
 
 	const handleMouseLeaveMain = () => {

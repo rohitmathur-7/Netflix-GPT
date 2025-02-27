@@ -5,16 +5,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "../utils/userSlice";
-import { LOGO, SUPPORTED_LANGS } from "../utils/constants";
+import { LOGO } from "../utils/constants";
 import { toggleGptSearchView } from "../utils/gptSlice";
-import { changeLanguage } from "../utils/configSlice";
 import { toggleMobileMenu } from "../utils/configSlice";
 import { Link } from "react-router-dom";
 import { Squash as Hamburger } from "hamburger-react";
 import { FiSearch, FiHome } from "react-icons/fi";
+import { PiListStarDuotone } from "react-icons/pi";
 import { IoIosLogIn } from "react-icons/io";
 import { AnimatePresence, motion } from "framer-motion";
 import MyAccount from "./MyAccount";
+import { SlStar } from "react-icons/sl";
 
 const Header = () => {
 	const [showAccountMenu, setShowAccountMenu] = useState(false);
@@ -61,10 +62,6 @@ const Header = () => {
 				// An error happened.
 				navigate("/error");
 			});
-	};
-
-	const handleLanguageChange = (e) => {
-		dispatch(changeLanguage(e.target.value));
 	};
 
 	const handleMouseEnter = () => {
@@ -131,26 +128,27 @@ const Header = () => {
 			</Link>
 			{user && (
 				<>
-					<div className="nav-desktop hidden md:flex items-center gap-4">
-						{showGptSearch && (
-							<select
-								className="text-black rounded-[4px]"
-								onChange={handleLanguageChange}
+					<div className="nav-desktop hidden md:flex items-center gap-8">
+						<Link to="/my-list" className="cursor-pointer">
+							<button
+								className="group relative text-white rounded-lg flex items-center justify-between gap-2 cursor-pointer"
+								onClick={() => handleGptSearchClick(false)}
 							>
-								{SUPPORTED_LANGS.map((lang) => (
-									<option key={lang.identifier} value={lang.identifier}>
-										{lang.name}
-									</option>
-								))}
-							</select>
-						)}
+								My List
+								<SlStar />
+								<span class="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-white group-hover:w-full"></span>
+							</button>
+						</Link>
+
 						{!isSearchPage && (
-							<Link to="/search">
+							<Link to="/search" className="cursor-pointer">
 								<button
-									className="bg-red-700 text-white px-4 py-2 rounded-lg"
+									className="group relative text-white rounded-lg flex items-center justify-between gap-2 cursor-pointer"
 									onClick={() => handleGptSearchClick(false)}
 								>
 									GPT Search
+									<span class="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-white group-hover:w-full"></span>
+									<FiSearch />
 								</button>
 							</Link>
 						)}
@@ -189,7 +187,27 @@ const Header = () => {
 									transition={{ duration: 0.2 }}
 									className="fixed left-0 right-0 top-[48px] py-8 bg-black h-full"
 								>
-									<ul className="flex flex-col px-4">
+									<ul className="flex flex-col px-4 gap-6">
+										<motion.li
+											initial={{ scale: 0, opacity: 0 }}
+											animate={{ scale: 1, opacity: 1 }}
+											transition={{
+												type: "spring",
+												stiffness: 260,
+												damping: 20,
+												delay: 0.1,
+											}}
+										>
+											<Link to="/my-list">
+												<button
+													className="text-white w-full rounded-lg flex items-center justify-between gap-2 cursor-pointer"
+													onClick={() => handleGptSearchClick(false)}
+												>
+													My List
+													<PiListStarDuotone />
+												</button>
+											</Link>
+										</motion.li>
 										<motion.li
 											initial={{ scale: 0, opacity: 0 }}
 											animate={{ scale: 1, opacity: 1 }}

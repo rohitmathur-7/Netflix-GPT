@@ -29,7 +29,7 @@ const Footer = () => {
 						<li>Terms of use</li>
 						<li>Privacy</li>
 						<li>
-							<Link to="/my-list">Wishlist</Link>
+							<Link to="/my-list">My List</Link>
 						</li>
 						<li>GPT Search</li>
 					</ul>
