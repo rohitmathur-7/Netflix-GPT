@@ -20,9 +20,10 @@ const MovieCard = ({
 	const wishlist = useSelector((state) => state.movies.wishlist); // Get wishlist from Redux store
 	const [showSingleMovie, setShowSingleMovie] = useState(false);
 	const [isHover, setIsHover] = useState(false);
+	const [imgWidth, setImgWidth] = useState(0);
+	const [isScalingDown, setIsScalingDown] = useState(false);
 	const cardRef = useRef(null);
 	const hoverTimeoutRef = useRef(null);
-	const [imgWidth, setImgWidth] = useState(0);
 	const movieCardImgRef = useRef(null);
 	const movieGenereIds = movie.genre_ids.slice(0, 2);
 
@@ -52,15 +53,13 @@ const MovieCard = ({
 
 	const handleMouseLeave = () => {
 		clearTimeout(hoverTimeoutRef.current);
-		const hoverElement = cardRef.current.querySelector(".movie-card-hover");
-		if (hoverElement) {
-			hoverElement.classList.add("scale-down");
-			setTimeout(() => {
-				setIsHover(false);
-				onHoverChange(false);
-				hoverElement.classList.remove("scale-down");
-			}, 100);
-		}
+
+		setIsScalingDown(true); // Trigger scale-down animation
+		setTimeout(() => {
+			setIsHover(false);
+			onHoverChange(false);
+			setIsScalingDown(false); // Reset scale-down state
+		}, 100);
 	};
 
 	const handleMouseLeaveMain = () => {
@@ -95,7 +94,9 @@ const MovieCard = ({
 			</div>
 			{isHover && (
 				<div
-					className="movie-card-hover cursor-pointer absolute z-[100] transition-all duration-300 ease-in-out"
+					className={`movie-card-hover cursor-pointer absolute z-[100] transition-all duration-300 ease-in-out ${
+						isScalingDown ? "scale-down" : ""
+					}`}
 					style={{
 						top: lastList ? "-3%" : "0",
 						transformOrigin: firstMovie
