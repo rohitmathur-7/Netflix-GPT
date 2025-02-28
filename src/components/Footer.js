@@ -26,12 +26,18 @@ const Footer = () => {
 				<p>Questions? Call 000-800-919-1743</p>
 				<div>
 					<ul className="flex flex-wrap justify-between">
-						<li>Terms of use</li>
-						<li>Privacy</li>
+						<li>
+							<Link to="/terms-of-use">Terms of use</Link>
+						</li>
+						<li>
+							<Link to="/policy">Privacy</Link>
+						</li>
 						<li>
 							<Link to="/my-list">My List</Link>
 						</li>
-						<li>GPT Search</li>
+						<li>
+							<Link to="/search">GPT Search</Link>
+						</li>
 					</ul>
 				</div>
 				<p className="text-[11px]">

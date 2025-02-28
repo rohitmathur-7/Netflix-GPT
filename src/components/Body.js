@@ -5,6 +5,8 @@ import SingleMovie from "./SingleMovie";
 import GptSearch from "./GptSearch";
 import { useSelector } from "react-redux";
 import MyList from "./MyList";
+import TermsOfUse from "./TermsOfUse";
+import Policy from "./Policy";
 
 const router = createBrowserRouter([
 	{
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
 	{
 		path: "/my-list",
 		element: <MyList />,
+	},
+	{
+		path: "/terms-of-use",
+		element: <TermsOfUse />,
+	},
+	{
+		path: "/policy",
+		element: <Policy />,
 	},
 ]);
 
