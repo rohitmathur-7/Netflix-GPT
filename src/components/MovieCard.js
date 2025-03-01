@@ -47,11 +47,12 @@ const MovieCard = ({
 
 	const handleMouseEnter = () => {
 		clearTimeout(scaleDownTimeOutRef.current);
+		clearTimeout(hoverTimeoutRef.current);
 
 		hoverTimeoutRef.current = setTimeout(() => {
 			setIsHover(true);
 			onHoverChange(true);
-		}, 800);
+		}, 300);
 	};
 
 	const handleMouseLeave = () => {

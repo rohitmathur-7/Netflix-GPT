@@ -11,7 +11,7 @@ const GptSearchBar = () => {
 	const langKey = useSelector((store) => store.config.lang);
 	const searchText = useRef(null);
 	const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-	const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+	const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 	const [tmdbResultsState, setTmdbResultsState] = useState([]);
 
 	const searchMovieTMDB = async (movie) => {
