@@ -141,7 +141,7 @@ const MovieCard = ({
 								)}
 							</div>
 							<div>
-								<h3>{movie.title}</h3>
+								<h3 className="text-xs">{movie.title}</h3>
 							</div>
 							<div className="flex flex-wrap gap-1 text-xs">
 								{movieGenereIds.map((id, idx) => (
