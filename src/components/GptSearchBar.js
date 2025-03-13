@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import lang from "../utils/languageConstants";
 import { GEMINI_API_KEY, API_OPTIONS } from "../utils/constants";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { addGeminiMovieResults } from "../utils/gptSlice";
+import { addGeminiMovieResults, setLoading } from "../utils/gptSlice";
 
 const GptSearchBar = () => {
 	const dispatch = useDispatch();
@@ -26,35 +26,43 @@ const GptSearchBar = () => {
 	};
 
 	const handleGptSearchClick = async () => {
-		const gptQuery =
-			"Act as a Movie Recommendation system and suggest some movies for the query : " +
-			searchText.current.value +
-			". only give me names of atleast 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
+		dispatch(setLoading(true)); // Start loading
 
-		const data = await model.generateContent(gptQuery);
-		const result = data.response.text();
-		const movies = result.split(",");
-		const geminiSuggestedMovies = movies.map((movie) => movie.trim());
+		try {
+			const gptQuery =
+				"Act as a Movie Recommendation system and suggest some movies for the query : " +
+				searchText.current.value +
+				". only give me names of atleast 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
 
-		const promiseArray = geminiSuggestedMovies.map((movie) =>
-			searchMovieTMDB(movie)
-		);
+			const data = await model.generateContent(gptQuery);
+			const result = data.response.text();
+			const movies = result.split(",");
+			const geminiSuggestedMovies = movies.map((movie) => movie.trim());
 
-		const res = await Promise.all(promiseArray);
-		const flattenedResults = res.flat();
+			const promiseArray = geminiSuggestedMovies.map((movie) =>
+				searchMovieTMDB(movie)
+			);
 
-		const tmdbResults = flattenedResults.filter((movie) => {
-			return geminiSuggestedMovies.includes(movie.original_title);
-		});
+			const res = await Promise.all(promiseArray);
+			const flattenedResults = res.flat();
 
-		setTmdbResultsState(tmdbResults);
+			const tmdbResults = flattenedResults.filter((movie) => {
+				return geminiSuggestedMovies.includes(movie.original_title);
+			});
 
-		dispatch(
-			addGeminiMovieResults({
-				movieNames: geminiSuggestedMovies,
-				movieResults: tmdbResults,
-			})
-		);
+			setTmdbResultsState(tmdbResults);
+
+			dispatch(
+				addGeminiMovieResults({
+					movieNames: geminiSuggestedMovies,
+					movieResults: tmdbResults,
+				})
+			);
+		} catch (error) {
+			console.error("Error fetching movie recommendations:", error);
+		} finally {
+			dispatch(setLoading(false)); // Stop loading
+		}
 	};
 
 	return (

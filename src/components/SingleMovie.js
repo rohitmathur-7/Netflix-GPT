@@ -17,7 +17,6 @@ const SingleMovie = () => {
 
 	// Fetch movie data from the Redux store
 	const movieData = useSelector((store) => store.movies?.singleMovie);
-	console.log("🚀 ~ SingleMovie ~ movieData:", movieData);
 
 	// Clear movie data on unmount
 	useEffect(() => {
@@ -27,9 +26,9 @@ const SingleMovie = () => {
 	}, [dispatch]);
 
 	// Show a loader if movie data isn't available yet
-	if (!movieData) {
-		return <Shimmer />;
-	}
+	// if (!movieData) {
+	return <Shimmer />;
+	// }
 
 	const {
 		poster_path,
