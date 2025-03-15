@@ -16,10 +16,12 @@ import { IoIosLogIn } from "react-icons/io";
 import { AnimatePresence, motion } from "framer-motion";
 import MyAccount from "./MyAccount";
 import { SlStar } from "react-icons/sl";
+import { SiXfce } from "react-icons/si";
 
 const Header = () => {
 	const [showAccountMenu, setShowAccountMenu] = useState(false);
 	const [timeOutId, setTimeOutId] = useState();
+	const [opactiyAnimateZero, setOpactiyAnimateZero] = useState();
 
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -66,13 +68,17 @@ const Header = () => {
 
 	const handleMouseEnter = () => {
 		clearTimeout(timeOutId);
-		setShowAccountMenu(true);
+		setTimeout(() => {
+			setShowAccountMenu(true);
+		}, 200);
 	};
 
 	const handleMouseLeave = () => {
+		setOpactiyAnimateZero(true);
 		const timeId = setTimeout(() => {
 			setShowAccountMenu(false);
-		}, 500);
+			setOpactiyAnimateZero(false);
+		}, 200);
 
 		setTimeOutId(timeId);
 	};
@@ -166,6 +172,8 @@ const Header = () => {
 							<span className="caret border-solid border-t-white border-l-transparent border-r-transparent border-b-transparent border-t-[5px] border-l-[5px] border-r-[5px] h-0 w-0 transform transition-transform group-hover:rotate-180" />
 							{showAccountMenu && (
 								<MyAccount
+									opactiyAnimateZero={opactiyAnimateZero}
+									showAccountMenu={showAccountMenu}
 									setShowAccountMenu={setShowAccountMenu}
 									handleSignOut={handleSignOut}
 								/>

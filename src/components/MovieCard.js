@@ -59,6 +59,7 @@ const MovieCard = ({
 		clearTimeout(hoverTimeoutRef.current);
 
 		setIsScalingDown(true); // Trigger scale-down animation
+
 		scaleDownTimeOutRef.current = setTimeout(() => {
 			setIsHover(false);
 			onHoverChange(false);
