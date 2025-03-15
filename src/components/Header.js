@@ -16,7 +16,6 @@ import { IoIosLogIn } from "react-icons/io";
 import { AnimatePresence, motion } from "framer-motion";
 import MyAccount from "./MyAccount";
 import { SlStar } from "react-icons/sl";
-import { SiXfce } from "react-icons/si";
 
 const Header = () => {
 	const [showAccountMenu, setShowAccountMenu] = useState(false);
@@ -68,16 +67,12 @@ const Header = () => {
 
 	const handleMouseEnter = () => {
 		clearTimeout(timeOutId);
-		setTimeout(() => {
-			setShowAccountMenu(true);
-		}, 200);
+		setShowAccountMenu(true);
 	};
 
 	const handleMouseLeave = () => {
-		setOpactiyAnimateZero(true);
 		const timeId = setTimeout(() => {
 			setShowAccountMenu(false);
-			setOpactiyAnimateZero(false);
 		}, 200);
 
 		setTimeOutId(timeId);
@@ -170,14 +165,14 @@ const Header = () => {
 								alt="User Profile Image"
 							/>
 							<span className="caret border-solid border-t-white border-l-transparent border-r-transparent border-b-transparent border-t-[5px] border-l-[5px] border-r-[5px] h-0 w-0 transform transition-transform group-hover:rotate-180" />
-							{showAccountMenu && (
-								<MyAccount
-									opactiyAnimateZero={opactiyAnimateZero}
-									showAccountMenu={showAccountMenu}
-									setShowAccountMenu={setShowAccountMenu}
-									handleSignOut={handleSignOut}
-								/>
-							)}
+							<AnimatePresence>
+								{showAccountMenu && (
+									<MyAccount
+										setShowAccountMenu={setShowAccountMenu}
+										handleSignOut={handleSignOut}
+									/>
+								)}
+							</AnimatePresence>
 						</div>
 					</div>
 					<div className="nav-mobile flex items-center md:hidden">
