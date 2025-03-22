@@ -9,6 +9,7 @@ import { movieGenres } from "../utils/movieGeneres";
 const MyList = () => {
 	const [movieGenreId, setmovieGenreId] = useState(null);
 	const myListMovies = useSelector((store) => store.movies.wishlist) || [];
+
 	const genreFilteredMovies = myListMovies.filter((movie) =>
 		movie.genre_ids.includes(movieGenreId)
 	);

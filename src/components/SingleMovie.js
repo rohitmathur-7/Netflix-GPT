@@ -55,6 +55,13 @@ const SingleMovie = () => {
 		year: "numeric",
 	});
 
+	const genreIds = movieData?.genres?.map((genre) => genre.id) || [];
+
+	const updatedMovieData = {
+		...movieData,
+		genre_ids: genreIds,
+	};
+
 	const isMovieInWishlist = wishlist.some((m) => m.id === Number(movieId));
 
 	const handleWishlistToggle = (e) => {
@@ -65,7 +72,7 @@ const SingleMovie = () => {
 			dispatch(removeFromWishlist(Number(movieId)));
 		} else {
 			// If the movie is not in the wishlist, add it
-			dispatch(addToWishlist(movieData));
+			dispatch(addToWishlist(updatedMovieData));
 		}
 	};
 
