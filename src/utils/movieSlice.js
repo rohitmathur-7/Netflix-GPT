@@ -36,6 +36,7 @@ const movieSlice = createSlice({
 		removeFromWishlist: (state, action) => {
 			const movieId = action.payload;
 			state.wishlist = state.wishlist.filter((m) => m.id !== movieId);
+			state.wishlist = state.wishlist.filter((m) => m !== movieId);
 		},
 	},
 });
