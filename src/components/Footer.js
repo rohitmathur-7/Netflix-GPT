@@ -27,16 +27,16 @@ const Footer = () => {
 				<div>
 					<ul className="flex flex-wrap justify-between">
 						<li>
-							<Link to="/terms-of-use">Terms of use</Link>
-						</li>
-						<li>
-							<Link to="/policy">Privacy</Link>
-						</li>
-						<li>
 							<Link to="/my-list">My List</Link>
 						</li>
 						<li>
 							<Link to="/search">GPT Search</Link>
+						</li>
+						<li>
+							<Link to="#">Terms of use</Link>
+						</li>
+						<li>
+							<Link to="#">Privacy</Link>
 						</li>
 					</ul>
 				</div>

@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import MyList from "./MyList";
 import TermsOfUse from "./TermsOfUse";
 import Policy from "./Policy";
+import NotFound from "./404";
 
 const router = createBrowserRouter([
 	{
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
 	{
 		path: "/policy",
 		element: <Policy />,
+	},
+	{
+		path: "*",
+		element: <NotFound />,
 	},
 ]);
 

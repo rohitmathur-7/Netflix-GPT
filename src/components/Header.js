@@ -33,10 +33,10 @@ const Header = () => {
 
 	const dispatch = useDispatch();
 
-	const isBrowsePage = location.pathname.includes("/browse");
-	const isSingleMoviePage = location.pathname.includes("/movie");
-	const isSearchPage = location.pathname.includes("/search");
-	const isMyListPage = location.pathname.includes("/my-list");
+	const isBrowsePage = location.pathname === "/browse";
+	const isSingleMoviePage = /^\/movie\/[^/]+$/.test(location.pathname);
+	const isSearchPage = location.pathname === "/search";
+	const isMyListPage = location.pathname === "/my-list";
 	const isLoginPage = !isBrowsePage && !isSingleMoviePage && !isSearchPage;
 
 	const handleMenuOpen = () => {
@@ -91,8 +91,15 @@ const Header = () => {
 						photoURL: photoURL,
 					})
 				);
+
 				// If the current URL does not include "/movie", navigate to /browse
-				if (!isSingleMoviePage && !isSearchPage && !isMyListPage) {
+				if (
+					!isBrowsePage &&
+					!isSingleMoviePage &&
+					!isSearchPage &&
+					!isMyListPage
+				) {
+					console.log("Here");
 					navigate("/browse");
 				}
 			} else {
