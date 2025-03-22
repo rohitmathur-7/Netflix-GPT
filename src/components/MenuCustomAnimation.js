@@ -27,7 +27,7 @@ const MenuCustomAnimation = ({ genreName, setmovieGenreId }) => {
 		>
 			<div className="flex items-center gap-2">
 				<MenuHandler>
-					<Button className="capitalize text-xl font-normal px-0 focus:outline-none">
+					<Button className="capitalize text-xl font-normal px-2 focus:outline-none">
 						<div className="flex items-center gap-2">
 							{undefined !== genreName ? genreName : "Genres"}
 							<IoFilterOutline />

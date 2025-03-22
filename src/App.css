@@ -50,7 +50,7 @@
 	@apply text-red-600;
 }
 
-.email-error::before {
+/* .email-error::before {
 	content: "";
 	display: inline-block;
 	width: 1rem;
@@ -63,7 +63,7 @@
 	top: 50%;
 	transform: translateY(-50%);
 	left: 0;
-}
+} */
 
 .sr-only {
 	position: absolute;

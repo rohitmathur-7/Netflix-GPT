@@ -26,9 +26,9 @@ const SingleMovie = () => {
 	}, [dispatch]);
 
 	// Show a loader if movie data isn't available yet
-	// if (!movieData) {
-	return <Shimmer />;
-	// }
+	if (!movieData) {
+		return <Shimmer />;
+	}
 
 	const {
 		poster_path,

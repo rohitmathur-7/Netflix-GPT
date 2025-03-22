@@ -10,9 +10,11 @@ import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { PROFILE_IMG, HOME_BG } from "../utils/constants";
+import { CgDanger } from "react-icons/cg";
 
 const Login = () => {
 	const [isSignIn, setIsSignIn] = useState(true);
+	const [nameError, setNameError] = useState(null);
 	const [emailError, setEmailError] = useState(null);
 	const [passwordError, setPasswordError] = useState(null);
 	const [authError, setAuthError] = useState(null);
@@ -32,14 +34,17 @@ const Login = () => {
 
 	const handleFormSubmission = (e) => {
 		const errors = checkDataValidation(
+			!isSignIn ? userName.current.value : null,
 			userEmail.current.value,
 			userPassword.current.value,
 			isSignIn
 		);
+
 		setEmailError(errors[0]);
 		setPasswordError(errors[1]);
+		setNameError(errors[2]);
 
-		if (null !== errors[0] || null !== errors[1]) return;
+		if (null !== errors[0] || null !== errors[1] || null !== errors[2]) return;
 
 		if (!isSignIn) {
 			// Sign Up Logic
@@ -77,7 +82,14 @@ const Login = () => {
 					const errorCode = error.code;
 					const errorMessage = error.message;
 
-					setAuthError(errorCode + "-" + errorMessage);
+					if ("auth/email-already-in-use" === errorCode) {
+						console.log("In hee");
+						setAuthError(
+							"The email is already in use. Please use another email"
+						);
+					} else {
+						setAuthError(errorCode + "-" + errorMessage);
+					}
 				});
 		} else {
 			// Sign In Logic
@@ -103,14 +115,12 @@ const Login = () => {
 	};
 
 	return (
-		<div className="login-page relative w-full h-full flex flex-col">
+		<div
+			className="login-page relative w-full h-full flex flex-col bg-repeat overflow-auto bg-cover"
+			style={{ backgroundImage: `url(${HOME_BG})` }}
+		>
 			<Header />
 			<div className="flex justify-center items-center grow">
-				<img
-					src={HOME_BG}
-					alt="Home background"
-					className="absolute top-0 w-screen h-screen object-cover opacity-50"
-				/>
 				<form
 					className="bg-black/70 flex flex-col text-white px-6 py-8 lg:px-16 max-w-[300px] lg:max-w-[450px] w-full relative z-0 rounded-[4px]"
 					onSubmit={(e) => e.preventDefault()}
@@ -144,6 +154,12 @@ const Login = () => {
 								/>
 							</>
 						)}
+						{!isSignIn && nameError && (
+							<span className="name-error form-error font-medium flex items-center gap-2">
+								<CgDanger className="w-[20px] h-[20px]" />
+								{nameError}
+							</span>
+						)}
 						<label htmlFor="email-id" className="sr-only">
 							Email
 						</label>
@@ -155,7 +171,8 @@ const Login = () => {
 							ref={userEmail}
 						/>
 						{emailError && (
-							<span className="email-error form-error relative pl-[1.3rem]">
+							<span className="email-error form-error relative font-medium flex items-center gap-2">
+								<CgDanger className="w-[20px] h-[20px]" />
 								{emailError}
 							</span>
 						)}
@@ -170,10 +187,20 @@ const Login = () => {
 							ref={userPassword}
 						/>
 						{passwordError && (
-							<span className="password-error form-error">{passwordError}</span>
+							<span
+								className="password-error form-error font-medium flex
+								items-center
+								gap-2"
+							>
+								<CgDanger className="w-[20px] h-[20px]" />
+								Invalid Password
+							</span>
 						)}
 						{authError && (
-							<span className="auth-error form-error">{authError}</span>
+							<span className="auth-error form-error font-medium flex items-center gap-2">
+								<CgDanger className="w-[30px] h-[30px]" />
+								{authError}
+							</span>
 						)}
 
 						<button
