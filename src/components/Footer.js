@@ -7,19 +7,28 @@ import youtubeLogo from "../assets/images/svgexport-17.svg";
 
 const Footer = () => {
 	return (
-		<div className="footer text-[#808080] bg-black relative z-[1]">
+		<div className="footer text-[#808080] bg-black relative z-[1] px-4 py-8">
 			<div className="flex flex-col gap-4 max-w-[980px] m-auto">
 				<div className="social-links flex gap-8 opacity-100">
-					<a href="https://www.facebook.com/">
+					<a
+						href="https://www.facebook.com/"
+						className="hover:scale-150 transition-all"
+					>
 						<img src={facebookLogo} />
 					</a>
-					<a href="https://www.instagram.com/">
+					<a
+						href="https://www.instagram.com/"
+						className="hover:scale-150 transition-all"
+					>
 						<img src={instagramLogo} />
 					</a>
-					<a href="https://x.com/">
+					<a href="https://x.com/" className="hover:scale-150 transition-all">
 						<img src={twitterLogo} />
 					</a>
-					<a href="https://www.youtube.com/">
+					<a
+						href="https://www.youtube.com/"
+						className="hover:scale-150 transition-all"
+					>
 						<img src={youtubeLogo} />
 					</a>
 				</div>
