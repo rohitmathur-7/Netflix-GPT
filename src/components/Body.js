@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+	createBrowserRouter,
+	RouterProvider,
+	ScrollRestoration,
+} from "react-router-dom";
 import Browse from "./Browse";
 import Login from "./Login";
 import SingleMovie from "./SingleMovie";
@@ -9,38 +13,80 @@ import TermsOfUse from "./TermsOfUse";
 import Policy from "./Policy";
 import NotFound from "./404";
 
+// Create a layout component that includes ScrollRestoration
+const Layout = ({ children }) => {
+	return (
+		<>
+			{children}
+			<ScrollRestoration />
+		</>
+	);
+};
+
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <Login />,
+		element: (
+			<Layout>
+				<Login />
+			</Layout>
+		),
 	},
 	{
 		path: "/browse",
-		element: <Browse />,
+		element: (
+			<Layout>
+				<Browse />
+			</Layout>
+		),
 	},
 	{
 		path: "/movie/:movieId", // Dynamic route for single movie based on title
-		element: <SingleMovie />,
+		element: (
+			<Layout>
+				<SingleMovie />
+			</Layout>
+		),
 	},
 	{
 		path: "/search", // Dynamic route for single movie based on title
-		element: <GptSearch />,
+		element: (
+			<Layout>
+				<GptSearch />
+			</Layout>
+		),
 	},
 	{
 		path: "/my-list",
-		element: <MyList />,
+		element: (
+			<Layout>
+				<MyList />
+			</Layout>
+		),
 	},
 	{
 		path: "/terms-of-use",
-		element: <TermsOfUse />,
+		element: (
+			<Layout>
+				<TermsOfUse />
+			</Layout>
+		),
 	},
 	{
 		path: "/policy",
-		element: <Policy />,
+		element: (
+			<Layout>
+				<Policy />
+			</Layout>
+		),
 	},
 	{
 		path: "*",
-		element: <NotFound />,
+		element: (
+			<Layout>
+				<NotFound />
+			</Layout>
+		),
 	},
 ]);
 

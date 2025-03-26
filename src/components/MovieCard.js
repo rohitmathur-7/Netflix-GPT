@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { IMG_CDN_URL } from "../utils/constants";
-import SingleMovie from "./SingleMovie";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { CiCirclePlus, CiCircleCheck } from "react-icons/ci";
 import { IoPlayCircleOutline } from "react-icons/io5";
 import { movieGenres } from "../utils/movieGeneres";
@@ -17,8 +17,8 @@ const MovieCard = ({
 	onHoverChange,
 }) => {
 	const dispatch = useDispatch();
-	const wishlist = useSelector((state) => state.movies.wishlist); // Get wishlist from Redux store
-	const [showSingleMovie, setShowSingleMovie] = useState(false);
+	const navigate = useNavigate(); // Initialize navigate
+	const wishlist = useSelector((state) => state.movies.wishlist);
 	const [isHover, setIsHover] = useState(false);
 	const [imgWidth, setImgWidth] = useState(0);
 	const [isScalingDown, setIsScalingDown] = useState(false);
@@ -26,10 +26,10 @@ const MovieCard = ({
 	const hoverTimeoutRef = useRef(null);
 	const scaleDownTimeOutRef = useRef(null);
 	const movieCardImgRef = useRef(null);
-	const movieGenereIds = movie.genre_ids.slice(0, 2);
+	const movieGenereIds = movie?.genre_ids?.slice(0, 2) || [];
 
 	// Check if the current movie is in the wishlist
-	const isMovieInWishlist = wishlist.some((m) => m.id === movie.id);
+	const isMovieInWishlist = wishlist.some((m) => m.id === movie?.id);
 
 	useEffect(() => {
 		if (movieCardImgRef.current) {
@@ -37,12 +37,28 @@ const MovieCard = ({
 		}
 	}, [posterPath, isHover]);
 
-	if (!posterPath) {
-		return null;
+	if (!movie || !posterPath) {
+		return (
+			<div className="animate-pulse rounded-md overflow-hidden">
+				<div
+					className="bg-gray-700"
+					style={{
+						width: imgWidth,
+					}}
+				></div>
+			</div>
+		);
 	}
 
 	const handleMovieClick = (e) => {
-		setShowSingleMovie(true);
+		// Check for Cmd (Mac) or Ctrl (Windows) key
+		if (e.metaKey || e.ctrlKey) {
+			// Open in a new tab
+			window.open(`/movie/${movie.id}`, "_blank");
+		} else {
+			// Normal navigation
+			navigate(`/movie/${movie.id}`);
+		}
 	};
 
 	const handleMouseEnter = () => {
@@ -73,6 +89,7 @@ const MovieCard = ({
 
 	const handleWishlistToggle = (e) => {
 		e.preventDefault();
+		e.stopPropagation(); // Prevent click from triggering movie navigation
 		if (isMovieInWishlist) {
 			// If the movie is in the wishlist, remove it
 			dispatch(removeFromWishlist(movie.id));
@@ -82,7 +99,7 @@ const MovieCard = ({
 		}
 	};
 
-	return !showSingleMovie ? (
+	return (
 		<div ref={cardRef} className="relative">
 			<div
 				className="movie-card h-full cursor-pointer relative z-10"
@@ -160,8 +177,6 @@ const MovieCard = ({
 				</div>
 			)}
 		</div>
-	) : (
-		<SingleMovie />
 	);
 };
 
