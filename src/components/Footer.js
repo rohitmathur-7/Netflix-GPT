@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import facebookLogo from "../assets/images/facebook.svg";
 import instagramLogo from "../assets/images/svgexport-15.svg";
 import twitterLogo from "../assets/images/svgexport-16.svg";
@@ -14,22 +14,22 @@ const Footer = () => {
 						href="https://www.facebook.com/"
 						className="hover:scale-150 transition-all"
 					>
-						<img src={facebookLogo} />
+						<img src={facebookLogo} alt="facebook logo" />
 					</a>
 					<a
 						href="https://www.instagram.com/"
 						className="hover:scale-150 transition-all"
 					>
-						<img src={instagramLogo} />
+						<img src={instagramLogo} alt="instagram logo" />
 					</a>
 					<a href="https://x.com/" className="hover:scale-150 transition-all">
-						<img src={twitterLogo} />
+						<img src={twitterLogo} alt="twitter logo" />
 					</a>
 					<a
 						href="https://www.youtube.com/"
 						className="hover:scale-150 transition-all"
 					>
-						<img src={youtubeLogo} />
+						<img src={youtubeLogo} alt="youtube logo" />
 					</a>
 				</div>
 				<p>Questions? Call 000-800-919-1743</p>
