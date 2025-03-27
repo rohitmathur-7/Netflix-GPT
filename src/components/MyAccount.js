@@ -3,12 +3,7 @@ import user from "../assets/images/user.jpg";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
-const MyAccount = ({
-	opactiyAnimateZero,
-	showAccountMenu,
-	setShowAccountMenu,
-	handleSignOut,
-}) => {
+const MyAccount = ({ handleSignOut }) => {
 	const [showUnderline, setShowUnderline] = useState(false);
 	const userName = useSelector((store) => store.user.displayName);
 

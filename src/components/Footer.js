@@ -7,7 +7,7 @@ import youtubeLogo from "../assets/images/svgexport-17.svg";
 
 const Footer = () => {
 	return (
-		<div className="footer text-[#808080] bg-black relative z-[1] px-4 py-8">
+		<div className="footer text-[#808080] bg-black relative z-[1] px-4 pb-12 pt-8 lg:py-8">
 			<div className="flex flex-col gap-4 max-w-[980px] m-auto">
 				<div className="social-links flex gap-8 opacity-100">
 					<a

@@ -8,6 +8,8 @@ const GptMovieRecommendations = () => {
 
 	if (loading) return <ShimmerGptSearch />;
 
+	if (null == movieResults) return;
+
 	return (
 		<div className="movie-recommendations overflow-y-visible relative z-0 bg-opacity-80 bg-black mt-[50px] py-[20px] px-4">
 			<MovieList

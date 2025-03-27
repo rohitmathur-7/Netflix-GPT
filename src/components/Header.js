@@ -10,7 +10,7 @@ import { toggleGptSearchView } from "../utils/gptSlice";
 import { toggleMobileMenu } from "../utils/configSlice";
 import { Link } from "react-router-dom";
 import { Squash as Hamburger } from "hamburger-react";
-import { FiSearch, FiHome } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 import { PiListStarDuotone } from "react-icons/pi";
 import { IoIosLogIn } from "react-icons/io";
 import { AnimatePresence, motion } from "framer-motion";
@@ -20,13 +20,11 @@ import { SlStar } from "react-icons/sl";
 const Header = () => {
 	const [showAccountMenu, setShowAccountMenu] = useState(false);
 	const [timeOutId, setTimeOutId] = useState();
-	const [opactiyAnimateZero, setOpactiyAnimateZero] = useState();
 
 	const location = useLocation();
 	const navigate = useNavigate();
 
 	const user = useSelector((store) => store.user);
-	const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 	const isMobileMenuOpen = useSelector(
 		(store) => store.config.isMobileMenuOpen
 	);
@@ -195,7 +193,7 @@ const Header = () => {
 									animate={{ opacity: 1 }}
 									exit={{ opacity: 0 }}
 									transition={{ duration: 0.2 }}
-									className="fixed left-0 right-0 top-[48px] py-8 bg-black h-full"
+									className="fixed left-0 right-0 top-[48px] py-8 bg-black h-full z-10"
 								>
 									<ul className="flex flex-col px-4 gap-6">
 										<motion.li

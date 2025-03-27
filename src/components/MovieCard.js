@@ -110,7 +110,7 @@ const MovieCard = ({
 				<img
 					alt="Movie Card"
 					src={IMG_CDN_URL + posterPath}
-					className="rounded-md rounded-b-none"
+					className="rounded-md"
 					ref={movieCardImgRef}
 				/>
 			</div>

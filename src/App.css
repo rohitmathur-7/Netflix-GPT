@@ -50,6 +50,10 @@
 	@apply text-red-600;
 }
 
+.ytp-chrome-bottom {
+	display: none !important;
+}
+
 /* .email-error::before {
 	content: "";
 	display: inline-block;

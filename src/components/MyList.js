@@ -16,6 +16,7 @@ const MyList = () => {
 
 	const showMovies =
 		genreFilteredMovies.length > 0 ? genreFilteredMovies : myListMovies;
+	console.log("🚀 ~ MyList ~ showMovies:", showMovies);
 
 	return (
 		<div className="my-list flex flex-col min-h-screen overflow-hidden justify-between">

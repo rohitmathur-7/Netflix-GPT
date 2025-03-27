@@ -26,19 +26,19 @@ const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
 			{
 				breakpoint: 1024,
 				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 3,
-					arrows: 3,
-					infinite: 3,
+					slidesToShow: Math.min(3, safeMovies.length),
+					slidesToScroll: Math.min(3, safeMovies.length),
+					arrows: true,
+					infinite: safeMovies.length > 2 ? true : false,
 				},
 			},
 			{
 				breakpoint: 600,
 				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 2,
-					arrows: 2,
-					infinite: 2,
+					slidesToShow: Math.min(2, safeMovies.length),
+					slidesToScroll: Math.min(2, safeMovies.length),
+					arrows: true,
+					infinite: safeMovies.length > 1 ? true : false,
 				},
 			},
 		],
@@ -49,7 +49,7 @@ const MovieList = ({ title, movies, isGptMovies, lastList = false }) => {
 			className="movie-list relative z-[5]"
 			style={{ zIndex: isHovered ? 10 : 5, position: "relative" }}
 		>
-			<h1 className="text-2xl pb-4 text-white pl-4">{title}</h1>
+			<h1 className="text-base lg:text-2xl pb-4 text-white">{title}</h1>
 			<div
 				className="relative"
 				onMouseEnter={() => setIsHoveredMovieList(true)}
