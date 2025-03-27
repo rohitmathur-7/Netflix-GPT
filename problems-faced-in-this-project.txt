@@ -1,0 +1,23 @@
+1. On page reload "Page Not Found" error was shown.
+   - This problem occurs because the server tries to find the exact path to the file, but it does not exist on the server 
+     hence it throws "Page not found" error.
+
+   Solution:
+   - Set up a catch all route on the server that will serve the index.html file for any request 
+     that does not match a static file or an api endpoint.  
+
+   I am hosting my site on Netlify, So here is the Netlify Specific Solution:
+   --------------------------------------------------------------------------------------
+   - Create a _redirects File, and add this in the file:
+     ------> /* /index.html 200
+
+        /* means "match any page"
+        /index.html specifies where to redirect
+        200 is the HTTP status code indicating a successful redirect
+
+   - The _redirects file tells Netlify to always serve the index.html file for any route,
+     allowing your React application's client-side router to handle the actual routing.  
+
+
+
+
